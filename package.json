@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "version": "gulp && git add dist"
+    "version": "gulp && git add dist -f"
   },
   "repository": {
     "type": "git",
