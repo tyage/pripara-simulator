@@ -1,4 +1,4 @@
-import Circle from './circle';
+import scenario from './scenario';
 
 const width = 360;
 const height = 640;
@@ -16,13 +16,27 @@ let clear = ctx => {
   ctx.fillRect(0, 0, width, height);
 };
 
-let circle = new Circle(10, 10, 10);
+let currentScenario = scenario().next();
+let items = [];
 let step = () => {
   clear(ctx);
 
-  circle.move();
-  circle.draw(ctx);
+  while (true) {
+    // current scenario is wait
+    if (currentScenario.value === false || currentScenario.done) {
+      break;
+    }
 
-  window.requestAnimationFrame(step);
+    let item = currentScenario.value;
+    items.push(item);
+
+    currentScenario = scenario.next();
+  }
+
+  items.forEach(item => item.step());
+
+  if (currentScenario.done === false) {
+    window.requestAnimationFrame(step);
+  }
 };
 step();
