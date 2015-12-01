@@ -1,7 +1,7 @@
 import Circle from './circle';
 
-let width = 360;
-let height = 640;
+const width = 360;
+const height = 640;
 
 let gameWindow = document.getElementById('game-window');
 let canvas = document.createElement('canvas');

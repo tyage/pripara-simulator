@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tyage/pripara-simualtor.git"
+    "url": "git+https://github.com/tyage/pripara-simulator.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tyage/pripara-simualtor/issues"
+    "url": "https://github.com/tyage/pripara-simulator/issues"
   },
-  "homepage": "https://github.com/tyage/pripara-simualtor#readme",
+  "homepage": "https://github.com/tyage/pripara-simulator#readme",
   "dependencies": {
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
