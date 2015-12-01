@@ -23,5 +23,8 @@ git checkout -- .
 git checkout gh-pages
 git merge -X theirs "$TRAVIS_COMMIT" --no-edit
 
+# Update version - build is automatically done by npm
+npm version patch
+
 # Push it all
 git push "https://${GH_TOKEN}@github.com/tyage/pripara-simulator.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
