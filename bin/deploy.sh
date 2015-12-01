@@ -9,7 +9,7 @@ fi
 
 # Convert clone to the full clone
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-git fetch --unshallow 2>/dev/null
+git fetch --unshallow || true
 
 # Set identification
 git config user.name "Travis CI"
