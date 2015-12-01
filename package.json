@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/tyage/pripara-simualtor/issues"
   },
-  "homepage": "https://github.com/tyage/pripara-simualtor#readme"
+  "homepage": "https://github.com/tyage/pripara-simualtor#readme",
+  "dependencies": {
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-less": "^3.0.5",
+    "gulp-util": "^3.0.7",
+    "normalize.css": "^3.0.3",
+    "webpack-stream": "^2.2.0"
+  }
 }
