@@ -6,12 +6,12 @@ export default class Circle {
 
     this.speedX = 0;
     this.speedY = 0;
-    this.step = 0;
+    this.stepCount = 0;
   }
 
   moveTo(x, y, stepCount) {
-    this.speedX = (x - this.x) / step;
-    this.speedY = (y - this.y) / step;
+    this.speedX = (x - this.x) / stepCount;
+    this.speedY = (y - this.y) / stepCount;
     this.stepCount = stepCount;
 
     return this;

@@ -1,4 +1,5 @@
-import scenario from './scenario';
+import 'babel-polyfill';
+import generateScenario from './scenario';
 
 const width = 360;
 const height = 640;
@@ -16,7 +17,8 @@ let clear = ctx => {
   ctx.fillRect(0, 0, width, height);
 };
 
-let currentScenario = scenario().next();
+let scenario = generateScenario();
+let currentScenario = scenario.next();
 let items = [];
 let step = () => {
   clear(ctx);
@@ -33,9 +35,13 @@ let step = () => {
     currentScenario = scenario.next();
   }
 
-  items.forEach(item => item.step());
+  items.forEach(item => {
+    item.step();
+    item.draw(ctx);
+  });
 
   if (currentScenario.done === false) {
+    currentScenario = scenario.next();
     window.requestAnimationFrame(step);
   }
 };
