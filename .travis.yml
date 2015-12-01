@@ -7,4 +7,6 @@ branches:
 install: npm install
 before_script:
   - chmod a+x bin/*
-script: ./bin/deploy.sh
+script: gulp
+after_success:
+  - ./bin/deploy.sh
