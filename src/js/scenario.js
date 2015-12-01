@@ -5,5 +5,6 @@ export default (function * () {
   yield (new Circle(10, 10, 10)).moveTo(100, 100, 20);
   yield * wait(10);
   yield (new Circle(10, 10, 10)).moveTo(100, 100, 20);
+  yield (new Circle(10, 30, 10)).moveTo(100, 100, 20);
   yield * wait(40);
 });
