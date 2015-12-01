@@ -9,7 +9,7 @@ fi
 
 # Convert clone to the full clone
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-git fetch origin/gh-pages
+git fetch origin gh-pages
 git fetch --unshallow || true
 
 # Set identification
