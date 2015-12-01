@@ -1,12 +1,15 @@
 language: node_js
 node_js:
-  - 'node'
+- node
 branches:
   only:
-    - master
+  - master
 install: npm install
 before_script:
-  - chmod a+x bin/*
+- chmod a+x bin/*
 script: gulp
 after_success:
-  - ./bin/deploy.sh
+- "./bin/deploy.sh"
+env:
+  global:
+    secure: IUZscpeBBIuZz7H1albAtimu2GzxGWLRPkXHEcE4Lsm/J99azZr5lFInM+j8nNBF0E4bv0DKEdZBH/J/v0U+GjeVZxV59nMslgBu7BLdaurn4odG/NqPbgkAYYg2kvNXcPN5VBbT5ZZosQgtvyToSLFZHfsszBEYRK3JnTg+spuXX8rJXNjk4tONjg9WhxuHEaiK+Wskyqyr0rxdqKSJC9pX5OdqKYQMX4Sg7pQ1sx94K4V1wq8c8dtSF8XMQb07KzyVTGtadEKRPA3TgXo52ApKS6srqKjdCpISqnjSPVQn1BEeAkgHQr1JVnAqjlPunk4kcg9TGn5Cg1mlgEbMAQnbnjGQDqlgIsx6j4i3tDLngr2mGQLhcBWf9ppDAmElKI46Ln5UMg7oG6Z6eJQFmHXSso+srH/zGM1cBV2rDEPx6QcMt22bJIC3zB2DtEGMFQs1hE+MBXs8fFH+v8Mm94IsarM5BjKW+197n5bL78P01r7lLyPpFz8TKxuzOZG2KWRgRLr5yAByWUYWbXfT9OHZX0KyhRTewO2Nx34KSnkbTNIjKJs3SayPKHhu6VKnS0oy3NofO3B3MxvWifFPlcF2sxrH7e01JpnD7RMreCl/Asw7XxYUnevGPia0p98zGm/OmP6CZsisBN7cpVoEsaGCqV4jK43sNlpjW5xMyuE=
