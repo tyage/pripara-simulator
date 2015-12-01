@@ -5397,9 +5397,13 @@
 	          return new _circle2.default(10, 10, 10).moveTo(100, 100, 20);
 	
 	        case 5:
-	          return _context.delegateYield((0, _utils.wait)(40), 't1', 6);
+	          _context.next = 7;
+	          return new _circle2.default(10, 30, 10).moveTo(100, 100, 20);
 	
-	        case 6:
+	        case 7:
+	          return _context.delegateYield((0, _utils.wait)(40), 't1', 8);
+	
+	        case 8:
 	        case 'end':
 	          return _context.stop();
 	      }
