@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - 'node'
+branches:
+  only:
+    - master
+install: npm install
+before_script:
+  - chmod a+x bin/*
+script: ./bin/deploy.sh
