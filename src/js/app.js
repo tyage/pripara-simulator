@@ -10,3 +10,8 @@ let ctx = canvas.getContext('2d');
 gameWindow.appendChild(canvas);
 canvas.width = width;
 canvas.height = height;
+
+let step = () => {
+  window.requestAnimationFrame(step);
+};
+step();
