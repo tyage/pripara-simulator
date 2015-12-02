@@ -1,6 +1,24 @@
-import { width, height } from './config';
+import Circle from './items/circle';
+import Button from './items/button';
+import { width, height, buttonPositionX, buttonPositionY } from './config';
 
-let wait = (seconds) => {
+let createButton = (wait) => {
+  let button = new Button(buttonPositionX, buttonPositionY);
+  button.moveTo(buttonPositionX, buttonPositionY, wait);
+  return button;
+}
+
+// angle: 0 - 1
+let createCircle = (angle, stepCount = 33) => {
+  let distance = 150;
+  let x = buttonPositionX + distance * Math.cos(Math.PI * 2 * angle);
+  let y = buttonPositionY - distance * Math.sin(Math.PI * 2 * angle);
+  let circle = new Circle(x, y);
+  circle.moveTo(buttonPositionX, buttonPositionY, stepCount);
+  return circle;
+};
+
+let wait = seconds => {
   let list = [];
   for (let i = 0; i < seconds; ++i) {
     list.push(false);
@@ -13,4 +31,4 @@ let clearCanvas = ctx => {
   ctx.fillRect(0, 0, width, height);
 };
 
-export { wait, clearCanvas };
+export { createButton, createCircle, wait, clearCanvas };

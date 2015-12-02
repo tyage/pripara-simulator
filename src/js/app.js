@@ -71,16 +71,18 @@ let step = () => {
   });
 
   if (isSuccess) {
-    console.log('success')
     items.push(new SuccessText());
   } else if (isFail) {
-    console.log('fail')
     items.push(new FailText());
   }
 
-  if (currentScenario.done === false) {
-    currentScenario = scenario.next();
-    window.requestAnimationFrame(step);
+  if (currentScenario.done === true) {
+    window.clearInterval(timer);
+    return;
   }
+
+  currentScenario = scenario.next();
 };
-step();
+let timer = window.setInterval(() => {
+  step();
+}, 30);
