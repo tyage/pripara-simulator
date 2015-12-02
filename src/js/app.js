@@ -71,10 +71,8 @@ let step = () => {
   });
 
   if (isSuccess) {
-    console.log('success')
     items.push(new SuccessText());
   } else if (isFail) {
-    console.log('fail')
     items.push(new FailText());
   }
 

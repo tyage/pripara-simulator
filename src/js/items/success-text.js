@@ -9,8 +9,9 @@ export default class SuccessText extends Base {
   }
 
   draw(ctx) {
-    ctx.fillStyle = 'blue';
-    ctx.fillText('メチャいいね♡', buttonPositionX, buttonPositionY + 100);
+    ctx.font = '20px "TakaoPGothic"';
+    ctx.fillStyle = '#e13e70';
+    ctx.fillText('メチャいいね♡', buttonPositionX - 45, buttonPositionY + 60);
 
     return this;
   }
