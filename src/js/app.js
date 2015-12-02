@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import generateScenario from './scenario';
 import { width, height } from './config';
+import { clearCanvas, drawFail, drawSuccess } from './utils';
 
 let gameWindow = document.getElementById('game-window');
 let canvas = document.createElement('canvas');
@@ -9,11 +10,6 @@ let ctx = canvas.getContext('2d');
 gameWindow.appendChild(canvas);
 canvas.width = width;
 canvas.height = height;
-
-let clear = ctx => {
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, width, height);
-};
 
 let scenario = generateScenario();
 let currentScenario = scenario.next();
@@ -39,7 +35,10 @@ canvas.addEventListener('mouseup', e => {
 });
 
 let step = () => {
-  clear(ctx);
+  let isSuccess = false;
+  let isFail = false;
+
+  clearCanvas(ctx);
 
   while (true) {
     // current scenario is wait
@@ -54,7 +53,16 @@ let step = () => {
   }
 
   items.forEach((item, i) => {
-    if (item.isFinish) {
+    if (item.isSuccess) {
+      // メチャ いいね♡
+      isSuccess = true;
+
+      items.splice(i, 1);
+      return;
+    } else if (item.isFail) {
+      // おしかったね
+      isFail = true;
+
       items.splice(i, 1);
       return;
     }
@@ -62,6 +70,12 @@ let step = () => {
     item.step();
     item.draw(ctx);
   });
+
+  if (isSuccess) {
+    drawSuccess(ctx);
+  } else if (isFail) {
+    drawFail(ctx);
+  }
 
   if (currentScenario.done === false) {
     currentScenario = scenario.next();

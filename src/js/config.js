@@ -2,4 +2,7 @@
 const width = 360;
 const height = 640;
 
-export { width, height };
+const buttonPositionX = width / 2;
+const buttonPositionY = height * 0.6;
+
+export { width, height, buttonPositionX, buttonPositionY };
