@@ -12,7 +12,5 @@ let clearCanvas = ctx => {
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, height);
 };
-let drawFail = ctx => {};
-let drawSuccess = ctx => {};
 
-export { wait, clearCanvas, drawFail, drawSuccess };
+export { wait, clearCanvas };

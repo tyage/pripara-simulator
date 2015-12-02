@@ -7,6 +7,12 @@ export default class Circle extends Base {
     this.radius = radius;
   }
 
+  onStepEnd() {
+    super.onStepEnd();
+
+    this.isFail = true;
+  }
+
   draw(ctx) {
     ctx.fillStyle = 'black';
     ctx.beginPath();
@@ -20,7 +26,6 @@ export default class Circle extends Base {
     let distanceX = buttonPositionX - this.x;
     let distanceY = buttonPositionY - this.y;
     if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
-      // clicked!
       this.isSuccess = true;
     }
   }

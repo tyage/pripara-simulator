@@ -6,6 +6,7 @@ export default class Base {
     this.speedX = 0;
     this.speedY = 0;
     this.stepCount = 0;
+    this.isEnd = false;
     this.isFail = false;
     this.isSuccess = false;
   }
@@ -24,10 +25,14 @@ export default class Base {
       this.y += this.speedY;
       --this.stepCount;
     } else {
-      this.isFail = true;
+      this.onStepEnd();
     }
 
     return this;
+  }
+
+  onStepEnd() {
+    this.isEnd = true;
   }
 
   draw(ctx) {

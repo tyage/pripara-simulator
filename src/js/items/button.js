@@ -7,6 +7,12 @@ export default class Button extends Circle {
     this.isClicked = false;
   }
 
+  onStepEnd() {
+    super.onStepEnd();
+
+    this.isFail = false;
+  }
+
   draw(ctx) {
     ctx.fillStyle = this.isClicked ? 'red' : 'black';
     ctx.beginPath();

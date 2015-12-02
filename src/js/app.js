@@ -1,7 +1,9 @@
 import 'babel-polyfill';
 import generateScenario from './scenario';
 import { width, height } from './config';
-import { clearCanvas, drawFail, drawSuccess } from './utils';
+import { clearCanvas } from './utils';
+import SuccessText from './items/success-text';
+import FailText from './items/fail-text';
 
 let gameWindow = document.getElementById('game-window');
 let canvas = document.createElement('canvas');
@@ -54,15 +56,12 @@ let step = () => {
 
   items.forEach((item, i) => {
     if (item.isSuccess) {
-      // メチャ いいね♡
       isSuccess = true;
-
-      items.splice(i, 1);
-      return;
-    } else if (item.isFail) {
-      // おしかったね
+    }
+    if (item.isFail) {
       isFail = true;
-
+    }
+    if (item.isEnd || item.isFail || item.isSuccess) {
       items.splice(i, 1);
       return;
     }
@@ -72,9 +71,11 @@ let step = () => {
   });
 
   if (isSuccess) {
-    drawSuccess(ctx);
+    console.log('success')
+    items.push(new SuccessText());
   } else if (isFail) {
-    drawFail(ctx);
+    console.log('fail')
+    items.push(new FailText());
   }
 
   if (currentScenario.done === false) {
