@@ -72,9 +72,9 @@ let drawScore = (ctx, score) => {
 
   // スコアの背景
   ctx.fillStyle = '#babbb6';
-  ctx.fillRect(0, 40, 120, 30);
+  ctx.fillRect(0, 40, 130, 30);
   ctx.fillStyle = 'white';
-  ctx.fillRect(2, 42, 116, 26);
+  ctx.fillRect(2, 42, 126, 26);
 
   // スコア
   ctx.font = '20px "TakaoPGothic"';
