@@ -1,20 +1,10 @@
-import Base from './base';
-import { buttonPositionX, buttonPositionY } from '../config';
+import ResultText from './result-text';
 
-export default class SuccessText extends Base {
+export default class SuccessText extends ResultText {
   constructor(x, y) {
     super(x, y);
 
-    this.stepCount = 10;
-  }
-
-  draw(ctx) {
-    ctx.save();
-
-    ctx.font = '20px "TakaoPGothic"';
-    ctx.fillStyle = '#e13e70';
-    ctx.fillText('メチャいいね♡', buttonPositionX - 45, buttonPositionY + 60);
-
-    ctx.restore();
+    this.text = 'メチャいいね♡';
+    this.color = '#e13e70';
   }
 }
