@@ -4,6 +4,7 @@ import { width, height } from './config';
 import { clearCanvas } from './utils';
 import SuccessText from './items/success-text';
 import FailText from './items/fail-text';
+import { drawStage1 } from './background';
 
 let gameWindow = document.getElementById('game-window');
 let canvas = document.createElement('canvas');
@@ -42,6 +43,7 @@ let step = () => {
 
   clearCanvas(ctx);
 
+  // fetch all items of current scenario
   while (true) {
     // current scenario is wait
     if (currentScenario.value === false || currentScenario.done) {
@@ -54,6 +56,7 @@ let step = () => {
     currentScenario = scenario.next();
   }
 
+  // step items and draw
   items.forEach((item, i) => {
     if (item.isSuccess) {
       isSuccess = true;
@@ -75,6 +78,9 @@ let step = () => {
   } else if (isFail) {
     items.push(new FailText());
   }
+
+  // TODO: draw a background of current stage
+  drawStage1(ctx);
 
   if (currentScenario.done === true) {
     window.clearInterval(timer);

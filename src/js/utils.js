@@ -1,12 +1,5 @@
 import Circle from './items/circle';
-import Button from './items/button';
 import { width, height, buttonPositionX, buttonPositionY } from './config';
-
-let createButton = (wait) => {
-  let button = new Button(buttonPositionX, buttonPositionY);
-  button.moveTo(buttonPositionX, buttonPositionY, wait);
-  return button;
-}
 
 // angle: 0 - 1
 let createCircle = (angle, stepCount = 33) => {
@@ -31,4 +24,4 @@ let clearCanvas = ctx => {
   ctx.fillRect(0, 0, width, height);
 };
 
-export { createButton, createCircle, wait, clearCanvas };
+export { createCircle, wait, clearCanvas };
