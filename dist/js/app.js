@@ -85,6 +85,7 @@
 	var scenario = (0, _scenario2.default)();
 	var currentScenario = scenario.next();
 	var items = [];
+	var score = 0;
 	
 	var getMousePosition = function getMousePosition(e) {
 	  var rect = canvas.getBoundingClientRect();
@@ -155,6 +156,7 @@
 	
 	  if (isSuccess) {
 	    items.push(new _successText2.default());
+	    score += 1000;
 	    for (var i = 0, l = Math.random() * 3; i < l; ++i) {
 	      items.push(new _iineText2.default());
 	    }
@@ -164,7 +166,7 @@
 	
 	  // TODO: draw a background of current stage
 	  (0, _background.drawStage1)(ctx);
-	  (0, _background.drawCommonBackground)(ctx);
+	  (0, _background.drawCommonBackground)(ctx, score);
 	
 	  if (currentScenario.done === true) {
 	    window.clearInterval(timer);
@@ -5855,11 +5857,14 @@
 	var buttonPositionY = height * 0.6;
 	var buttonRadius = 25;
 	
+	var maxScore = 10000;
+	
 	exports.width = width;
 	exports.height = height;
 	exports.buttonPositionX = buttonPositionX;
 	exports.buttonPositionY = buttonPositionY;
 	exports.buttonRadius = buttonRadius;
+	exports.maxScore = maxScore;
 
 /***/ },
 /* 196 */
@@ -6023,8 +6028,6 @@
 	
 	      ctx.font = this.fontSize + 'px "TakaoPGothic"';
 	      ctx.shadowColor = 'black';
-	      ctx.shadowOffsetX = 0;
-	      ctx.shadowOffsetY = 0;
 	      ctx.shadowBlur = 3;
 	      ctx.fillStyle = 'white';
 	      ctx.fillText('いいね♡', this.x, this.y);
@@ -6096,8 +6099,29 @@
 	  ctx.restore();
 	};
 	
-	var drawCommonBackground = function drawCommonBackground(ctx) {
-	  // TODO: ゲージ
+	var drawScore = function drawScore(ctx, score) {
+	  ctx.save();
+	
+	  // 縁
+	  ctx.strokeStyle = '#c4b6d7';
+	  ctx.shadowColor = '#e9d2e9';
+	  ctx.shadowBlur = 10;
+	  ctx.lineWidth = 10;
+	  ctx.strokeRect(20, 30, _config.width - 40, 30);
+	
+	  // スコアのゲージ
+	  var grad = ctx.createLinearGradient(20, 30, _config.width - 40, 30);
+	  grad.addColorStop(0, '#f0c4d1');
+	  grad.addColorStop(1, '#df83a0');
+	  ctx.fillStyle = grad;
+	  var scoreWidth = (_config.width - 40) * score / _config.maxScore;
+	  ctx.fillRect(20, 30, scoreWidth, 30);
+	
+	  ctx.restore();
+	};
+	
+	var drawCommonBackground = function drawCommonBackground(ctx, score) {
+	  drawScore(ctx, score);
 	};
 	
 	exports.drawStage1 = drawStage1;
