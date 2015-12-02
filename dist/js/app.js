@@ -86,9 +86,10 @@
 	var score = 0;
 	
 	// auto iine
-	var isAuto = false;
-	document.getElementById('auto-iine-value').addEventListener('change', function (e) {
-	  isAuto = e.target.checked;
+	var autoCheckbox = document.getElementById('auto-iine-value');
+	var isAuto = autoCheckbox.checked;
+	autoCheckbox.addEventListener('change', function (e) {
+	  isAuto = autoCheckbox.checked;
 	  return false;
 	});
 	
@@ -6157,6 +6158,24 @@
 	  ctx.shadowBlur = 10;
 	  ctx.lineWidth = 5;
 	  ctx.strokeRect(0, 0, _config.width - 40, 30);
+	
+	  // スコアの背景
+	  ctx.fillStyle = '#babbb6';
+	  ctx.fillRect(0, 40, 120, 30);
+	  ctx.fillStyle = 'white';
+	  ctx.fillRect(2, 42, 116, 26);
+	
+	  // スコア
+	  ctx.font = '20px "TakaoPGothic"';
+	  ctx.fillStyle = '#bb009e';
+	  ctx.textBaseline = 'top';
+	  ctx.fillText(score, 10, 45);
+	
+	  // いいね♡
+	  ctx.font = '10px "TakaoPGothic"';
+	  ctx.fillStyle = '#bb009e';
+	  ctx.textBaseline = 'top';
+	  ctx.fillText('いいね♡', 80, 55);
 	
 	  ctx.restore();
 	};
