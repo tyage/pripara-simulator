@@ -1,3 +1,5 @@
+import { width, height } from './config';
+
 let wait = (seconds) => {
   let list = [];
   for (let i = 0; i < seconds; ++i) {
@@ -6,4 +8,9 @@ let wait = (seconds) => {
   return list;
 };
 
-export { wait };
+let clearCanvas = ctx => {
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, width, height);
+};
+
+export { wait, clearCanvas };

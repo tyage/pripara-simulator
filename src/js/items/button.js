@@ -1,6 +1,18 @@
 import Circle from './circle';
 
 export default class Button extends Circle {
+  constructor(x, y, radius = 25) {
+    super(x, y, radius);
+
+    this.isClicked = false;
+  }
+
+  onStepEnd() {
+    super.onStepEnd();
+
+    this.isFail = false;
+  }
+
   draw(ctx) {
     ctx.fillStyle = this.isClicked ? 'red' : 'black';
     ctx.beginPath();
@@ -8,5 +20,13 @@ export default class Button extends Circle {
     ctx.fill();
 
     return this;
+  }
+
+  onMouseDown(x, y) {
+    this.isClicked = true;
+  }
+
+  onMouseUp(x, y) {
+    this.isClicked = false;
   }
 }
