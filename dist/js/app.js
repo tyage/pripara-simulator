@@ -54,7 +54,7 @@
 	
 	var _scenario2 = _interopRequireDefault(_scenario);
 	
-	var _config = __webpack_require__(193);
+	var _config = __webpack_require__(195);
 	
 	var _utils = __webpack_require__(192);
 	
@@ -146,19 +146,21 @@
 	  });
 	
 	  if (isSuccess) {
-	    console.log('success');
 	    items.push(new _successText2.default());
 	  } else if (isFail) {
-	    console.log('fail');
 	    items.push(new _failText2.default());
 	  }
 	
-	  if (currentScenario.done === false) {
-	    currentScenario = scenario.next();
-	    window.requestAnimationFrame(step);
+	  if (currentScenario.done === true) {
+	    window.clearInterval(timer);
+	    return;
 	  }
+	
+	  currentScenario = scenario.next();
 	};
-	step();
+	var timer = window.setInterval(function () {
+	  step();
+	}, 30);
 
 /***/ },
 /* 1 */
@@ -5435,17 +5437,9 @@
 	
 	var _utils = __webpack_require__(192);
 	
-	var _circle = __webpack_require__(194);
+	var _config = __webpack_require__(195);
 	
-	var _circle2 = _interopRequireDefault(_circle);
-	
-	var _button = __webpack_require__(196);
-	
-	var _button2 = _interopRequireDefault(_button);
-	
-	var _config = __webpack_require__(193);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var baseStep = 33;
 	
 	exports.default = regeneratorRuntime.mark(function _callee() {
 	  return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -5453,27 +5447,131 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return new _button2.default(_config.buttonPositionX, _config.buttonPositionY).moveTo(_config.buttonPositionX, _config.buttonPositionY, 150);
+	          return (0, _utils.createButton)(500);
 	
 	        case 2:
 	          _context.next = 4;
-	          return new _circle2.default(10, 10).moveTo(_config.buttonPositionX, _config.buttonPositionY, 100);
+	          return (0, _utils.createCircle)(1 / 8);
 	
 	        case 4:
-	          return _context.delegateYield((0, _utils.wait)(50), 't0', 5);
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't0', 5);
 	
 	        case 5:
 	          _context.next = 7;
-	          return new _circle2.default(10, 10).moveTo(_config.buttonPositionX, _config.buttonPositionY, 100);
+	          return (0, _utils.createCircle)(0 / 8);
 	
 	        case 7:
-	          _context.next = 9;
-	          return new _circle2.default(10, 110).moveTo(_config.buttonPositionX, _config.buttonPositionY, 100);
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't1', 8);
 	
-	        case 9:
-	          return _context.delegateYield((0, _utils.wait)(200), 't1', 10);
+	        case 8:
+	          _context.next = 10;
+	          return (0, _utils.createCircle)(7 / 8);
 	
 	        case 10:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't2', 11);
+	
+	        case 11:
+	          _context.next = 13;
+	          return (0, _utils.createCircle)(6 / 8);
+	
+	        case 13:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't3', 14);
+	
+	        case 14:
+	          _context.next = 16;
+	          return (0, _utils.createCircle)(5 / 8);
+	
+	        case 16:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't4', 17);
+	
+	        case 17:
+	          _context.next = 19;
+	          return (0, _utils.createCircle)(4 / 8);
+	
+	        case 19:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't5', 20);
+	
+	        case 20:
+	          _context.next = 22;
+	          return (0, _utils.createCircle)(3 / 8);
+	
+	        case 22:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't6', 23);
+	
+	        case 23:
+	          _context.next = 25;
+	          return (0, _utils.createCircle)(0 / 8);
+	
+	        case 25:
+	          _context.next = 27;
+	          return (0, _utils.createCircle)(4 / 8);
+	
+	        case 27:
+	          return _context.delegateYield((0, _utils.wait)(baseStep / 2), 't7', 28);
+	
+	        case 28:
+	          _context.next = 30;
+	          return (0, _utils.createCircle)(0 / 8);
+	
+	        case 30:
+	          _context.next = 32;
+	          return (0, _utils.createCircle)(4 / 8);
+	
+	        case 32:
+	          return _context.delegateYield((0, _utils.wait)(baseStep / 2), 't8', 33);
+	
+	        case 33:
+	          _context.next = 35;
+	          return (0, _utils.createCircle)(1 / 8);
+	
+	        case 35:
+	          _context.next = 37;
+	          return (0, _utils.createCircle)(3 / 8);
+	
+	        case 37:
+	          _context.next = 39;
+	          return (0, _utils.createCircle)(6 / 8);
+	
+	        case 39:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't9', 40);
+	
+	        case 40:
+	          _context.next = 42;
+	          return (0, _utils.createCircle)(4 / 8);
+	
+	        case 42:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't10', 43);
+	
+	        case 43:
+	          _context.next = 45;
+	          return (0, _utils.createCircle)(6 / 8);
+	
+	        case 45:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't11', 46);
+	
+	        case 46:
+	          _context.next = 48;
+	          return (0, _utils.createCircle)(0 / 8);
+	
+	        case 48:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't12', 49);
+	
+	        case 49:
+	          _context.next = 51;
+	          return (0, _utils.createCircle)(1 / 8);
+	
+	        case 51:
+	          _context.next = 53;
+	          return (0, _utils.createCircle)(3 / 8);
+	
+	        case 53:
+	          _context.next = 55;
+	          return (0, _utils.createCircle)(6 / 8);
+	
+	        case 55:
+	          return _context.delegateYield((0, _utils.wait)(200), 't13', 56);
+	
+	        case 56:
 	        case 'end':
 	          return _context.stop();
 	      }
@@ -5490,9 +5588,37 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.clearCanvas = exports.wait = undefined;
+	exports.clearCanvas = exports.wait = exports.createCircle = exports.createButton = undefined;
 	
-	var _config = __webpack_require__(193);
+	var _circle = __webpack_require__(193);
+	
+	var _circle2 = _interopRequireDefault(_circle);
+	
+	var _button = __webpack_require__(196);
+	
+	var _button2 = _interopRequireDefault(_button);
+	
+	var _config = __webpack_require__(195);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var createButton = function createButton(wait) {
+	  var button = new _button2.default(_config.buttonPositionX, _config.buttonPositionY);
+	  button.moveTo(_config.buttonPositionX, _config.buttonPositionY, wait);
+	  return button;
+	};
+	
+	// angle: 0 - 1
+	var createCircle = function createCircle(angle) {
+	  var stepCount = arguments.length <= 1 || arguments[1] === undefined ? 33 : arguments[1];
+	
+	  var distance = 150;
+	  var x = _config.buttonPositionX + distance * Math.cos(Math.PI * 2 * angle);
+	  var y = _config.buttonPositionY - distance * Math.sin(Math.PI * 2 * angle);
+	  var circle = new _circle2.default(x, y);
+	  circle.moveTo(_config.buttonPositionX, _config.buttonPositionY, stepCount);
+	  return circle;
+	};
 	
 	var wait = function wait(seconds) {
 	  var list = [];
@@ -5507,32 +5633,13 @@
 	  ctx.fillRect(0, 0, _config.width, _config.height);
 	};
 	
+	exports.createButton = createButton;
+	exports.createCircle = createCircle;
 	exports.wait = wait;
 	exports.clearCanvas = clearCanvas;
 
 /***/ },
 /* 193 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	// original: 1920 x 3413
-	var width = 360;
-	var height = 640;
-	
-	var buttonPositionX = width / 2;
-	var buttonPositionY = height * 0.6;
-	
-	exports.width = width;
-	exports.height = height;
-	exports.buttonPositionX = buttonPositionX;
-	exports.buttonPositionY = buttonPositionY;
-
-/***/ },
-/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5545,11 +5652,11 @@
 	  value: true
 	});
 	
-	var _base = __webpack_require__(195);
+	var _base = __webpack_require__(194);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _config = __webpack_require__(193);
+	var _config = __webpack_require__(195);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -5587,15 +5694,13 @@
 	      ctx.beginPath();
 	      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 	      ctx.fill();
-	
-	      return this;
 	    }
 	  }, {
 	    key: 'onMouseDown',
 	    value: function onMouseDown(x, y) {
 	      var distanceX = _config.buttonPositionX - this.x;
 	      var distanceY = _config.buttonPositionY - this.y;
-	      if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
+	      if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius * 2, 2)) {
 	        this.isSuccess = true;
 	      }
 	    }
@@ -5610,7 +5715,7 @@
 	exports.default = Circle;
 
 /***/ },
-/* 195 */
+/* 194 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5644,8 +5749,6 @@
 	      this.speedX = (x - this.x) / stepCount;
 	      this.speedY = (y - this.y) / stepCount;
 	      this.stepCount = stepCount;
-	
-	      return this;
 	    }
 	  }, {
 	    key: "step",
@@ -5657,8 +5760,6 @@
 	      } else {
 	        this.onStepEnd();
 	      }
-	
-	      return this;
 	    }
 	  }, {
 	    key: "onStepEnd",
@@ -5667,9 +5768,7 @@
 	    }
 	  }, {
 	    key: "draw",
-	    value: function draw(ctx) {
-	      return this;
-	    }
+	    value: function draw(ctx) {}
 	  }, {
 	    key: "onMouseDown",
 	    value: function onMouseDown(x, y) {}
@@ -5682,6 +5781,27 @@
 	})();
 	
 	exports.default = Base;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// original: 1920 x 3413
+	var width = 360;
+	var height = 640;
+	
+	var buttonPositionX = width / 2;
+	var buttonPositionY = height * 0.6;
+	
+	exports.width = width;
+	exports.height = height;
+	exports.buttonPositionX = buttonPositionX;
+	exports.buttonPositionY = buttonPositionY;
 
 /***/ },
 /* 196 */
@@ -5697,7 +5817,7 @@
 	  value: true
 	});
 	
-	var _circle = __webpack_require__(194);
+	var _circle = __webpack_require__(193);
 	
 	var _circle2 = _interopRequireDefault(_circle);
 	
@@ -5737,8 +5857,6 @@
 	      ctx.beginPath();
 	      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 	      ctx.fill();
-	
-	      return this;
 	    }
 	  }, {
 	    key: 'onMouseDown',
@@ -5769,11 +5887,11 @@
 	  value: true
 	});
 	
-	var _base = __webpack_require__(195);
+	var _base = __webpack_require__(194);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _config = __webpack_require__(193);
+	var _config = __webpack_require__(195);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -5798,10 +5916,9 @@
 	  _createClass(SuccessText, [{
 	    key: 'draw',
 	    value: function draw(ctx) {
-	      ctx.fillStyle = 'blue';
-	      ctx.fillText('メチャいいね♡', _config.buttonPositionX, _config.buttonPositionY + 100);
-	
-	      return this;
+	      ctx.font = '20px "TakaoPGothic"';
+	      ctx.fillStyle = '#e13e70';
+	      ctx.fillText('メチャいいね♡', _config.buttonPositionX - 45, _config.buttonPositionY + 60);
 	    }
 	  }]);
 	
@@ -5822,11 +5939,11 @@
 	  value: true
 	});
 	
-	var _base = __webpack_require__(195);
+	var _base = __webpack_require__(194);
 	
 	var _base2 = _interopRequireDefault(_base);
 	
-	var _config = __webpack_require__(193);
+	var _config = __webpack_require__(195);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -5851,10 +5968,9 @@
 	  _createClass(SuccessText, [{
 	    key: 'draw',
 	    value: function draw(ctx) {
-	      ctx.fillStyle = 'blue';
-	      ctx.fillText('おしかったね', _config.buttonPositionX, _config.buttonPositionY + 100);
-	
-	      return this;
+	      ctx.font = '20px "TakaoPGothic"';
+	      ctx.fillStyle = 'purple';
+	      ctx.fillText('おしかったね', _config.buttonPositionX - 45, _config.buttonPositionY + 60);
 	    }
 	  }]);
 	
