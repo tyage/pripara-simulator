@@ -62,15 +62,15 @@
 	
 	var _successText2 = _interopRequireDefault(_successText);
 	
-	var _failText = __webpack_require__(197);
+	var _failText = __webpack_require__(198);
 	
 	var _failText2 = _interopRequireDefault(_failText);
 	
-	var _iineText = __webpack_require__(198);
+	var _iineText = __webpack_require__(199);
 	
 	var _iineText2 = _interopRequireDefault(_iineText);
 	
-	var _background = __webpack_require__(199);
+	var _background = __webpack_require__(200);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -5872,17 +5872,13 @@
 
 	'use strict';
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _base = __webpack_require__(194);
+	var _resultText = __webpack_require__(197);
 	
-	var _base2 = _interopRequireDefault(_base);
-	
-	var _config = __webpack_require__(195);
+	var _resultText2 = _interopRequireDefault(_resultText);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -5892,33 +5888,21 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var SuccessText = (function (_Base) {
-	  _inherits(SuccessText, _Base);
+	var SuccessText = (function (_ResultText) {
+	  _inherits(SuccessText, _ResultText);
 	
 	  function SuccessText(x, y) {
 	    _classCallCheck(this, SuccessText);
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuccessText).call(this, x, y));
 	
-	    _this.stepCount = 10;
+	    _this.text = 'メチャいいね♡';
+	    _this.color = '#e13e70';
 	    return _this;
 	  }
 	
-	  _createClass(SuccessText, [{
-	    key: 'draw',
-	    value: function draw(ctx) {
-	      ctx.save();
-	
-	      ctx.font = '20px "TakaoPGothic"';
-	      ctx.fillStyle = '#e13e70';
-	      ctx.fillText('メチャいいね♡', _config.buttonPositionX - 45, _config.buttonPositionY + 60);
-	
-	      ctx.restore();
-	    }
-	  }]);
-	
 	  return SuccessText;
-	})(_base2.default);
+	})(_resultText2.default);
 	
 	exports.default = SuccessText;
 
@@ -5930,6 +5914,8 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -5948,38 +5934,104 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var SuccessText = (function (_Base) {
-	  _inherits(SuccessText, _Base);
+	var ResultText = (function (_Base) {
+	  _inherits(ResultText, _Base);
 	
-	  function SuccessText(x, y) {
-	    _classCallCheck(this, SuccessText);
+	  function ResultText() {
+	    var x = arguments.length <= 0 || arguments[0] === undefined ? _config.buttonPositionX : arguments[0];
+	    var y = arguments.length <= 1 || arguments[1] === undefined ? _config.buttonPositionY + 60 : arguments[1];
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuccessText).call(this, x, y));
+	    _classCallCheck(this, ResultText);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ResultText).call(this, x, y));
 	
 	    _this.stepCount = 10;
+	    _this.text = '';
+	    _this.color = '';
+	    _this.fontSize = 17;
+	    _this.alpha = 0;
+	    _this.speedY = -2;
 	    return _this;
 	  }
 	
-	  _createClass(SuccessText, [{
+	  _createClass(ResultText, [{
+	    key: 'step',
+	    value: function step() {
+	      _get(Object.getPrototypeOf(ResultText.prototype), 'step', this).call(this);
+	
+	      if (this.stepCount < 5) {
+	        // bigger & fadein
+	        this.fontSize += 0.2;
+	        this.alpha += 0.1;
+	      } else {
+	        // smaller & fadeout
+	        this.fontSize -= 0.2;
+	        this.alpha -= 0.1;
+	      }
+	    }
+	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
 	      ctx.save();
 	
-	      ctx.font = '20px "TakaoPGothic"';
-	      ctx.fillStyle = 'purple';
-	      ctx.fillText('おしかったね', _config.buttonPositionX - 45, _config.buttonPositionY + 60);
+	      ctx.font = this.fontSize + 'px "TakaoPGothic"';
+	      ctx.globalAlpha = this.alpha;
+	      ctx.fillStyle = this.color;
+	      ctx.textAlign = 'center';
+	      ctx.textBaseline = 'middle';
+	      ctx.fillText(this.text, this.x, this.y);
 	
 	      ctx.restore();
 	    }
 	  }]);
 	
-	  return SuccessText;
+	  return ResultText;
 	})(_base2.default);
 	
-	exports.default = SuccessText;
+	exports.default = ResultText;
 
 /***/ },
 /* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _resultText = __webpack_require__(197);
+	
+	var _resultText2 = _interopRequireDefault(_resultText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FailText = (function (_ResultText) {
+	  _inherits(FailText, _ResultText);
+	
+	  function FailText(x, y) {
+	    _classCallCheck(this, FailText);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FailText).call(this, x, y));
+	
+	    _this.text = 'おしかったね';
+	    _this.color = 'purple';
+	    return _this;
+	  }
+	
+	  return FailText;
+	})(_resultText2.default);
+	
+	exports.default = FailText;
+
+/***/ },
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6042,7 +6094,7 @@
 	exports.default = SuccessText;
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6093,8 +6145,10 @@
 	
 	  // 下部のテキスト
 	  ctx.font = '25px "TakaoPGothic"';
+	  ctx.textAlign = 'center';
+	  ctx.textBaseline = 'middle';
 	  ctx.fillStyle = '#37ade1';
-	  ctx.fillText('画面をおしてね！', _config.width / 2 - 80, _config.height - 30);
+	  ctx.fillText('画面をおしてね！', _config.width / 2, _config.height - 40);
 	
 	  ctx.restore();
 	};
