@@ -5,4 +5,4 @@
 
 [![Travis Status][travis-image]][travis-url]
 
-http://tyage.github.io/pripara-simulator/
+https://tyage.github.io/pripara-simulator/
