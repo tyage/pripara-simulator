@@ -77,7 +77,7 @@ let step = () => {
 
   if (isSuccess) {
     items.push(new SuccessText());
-    score += 1000;
+    score += 800;
     for (let i = 0, l = Math.random() * 3; i < l; ++i) {
       items.push(new Iine());
     }
