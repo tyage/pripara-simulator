@@ -20,8 +20,12 @@ let wait = seconds => {
 };
 
 let clearCanvas = ctx => {
+  ctx.save();
+
   ctx.fillStyle = 'rgb(253, 219, 246)';
   ctx.fillRect(0, 0, width, height);
+
+  ctx.restore();
 };
 
 export { createCircle, wait, clearCanvas };
