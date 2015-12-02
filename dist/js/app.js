@@ -5905,10 +5905,35 @@
 	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
-	      ctx.fillStyle = this.isClicked ? 'red' : 'black';
+	      ctx.save();
+	
+	      ctx.translate(this.x, this.y);
+	
+	      // 一番外のふち
+	      ctx.strokeStyle = '#ca31cd';
+	      ctx.lineWidth = 7;
 	      ctx.beginPath();
-	      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-	      ctx.fill();
+	      ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
+	      ctx.stroke();
+	
+	      // 一つ中にあるふち
+	      ctx.strokeStyle = 'white';
+	      ctx.lineWidth = 5;
+	      ctx.beginPath();
+	      ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
+	      ctx.stroke();
+	
+	      // 一番中のふち
+	      var grad = ctx.createLinearGradient(0, 0, 0, this.radius * 2);
+	      grad.addColorStop(0, '#a77518');
+	      grad.addColorStop(1, '#f3e244');
+	      ctx.strokeStyle = grad;
+	      ctx.lineWidth = 4;
+	      ctx.beginPath();
+	      ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
+	      ctx.stroke();
+	
+	      ctx.restore();
 	    }
 	  }, {
 	    key: 'onMouseDown',
