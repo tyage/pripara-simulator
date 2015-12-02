@@ -5458,8 +5458,8 @@
 	
 	var baseStep = 33;
 	
-	exports.default = regeneratorRuntime.mark(function _callee() {
-	  return regeneratorRuntime.wrap(function _callee$(_context) {
+	var luckySurpriseBirthday = regeneratorRuntime.mark(function luckySurpriseBirthday() {
+	  return regeneratorRuntime.wrap(function luckySurpriseBirthday$(_context) {
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
@@ -5582,15 +5582,17 @@
 	          return (0, _utils.createCircle)(6 / 8);
 	
 	        case 53:
-	          return _context.delegateYield((0, _utils.wait)(200), 't13', 54);
+	          return _context.delegateYield(luckySurpriseBirthday(), 't13', 54);
 	
 	        case 54:
 	        case 'end':
 	          return _context.stop();
 	      }
 	    }
-	  }, _callee, this);
+	  }, luckySurpriseBirthday, this);
 	});
+	
+	exports.default = luckySurpriseBirthday;
 
 /***/ },
 /* 192 */
