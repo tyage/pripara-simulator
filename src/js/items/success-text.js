@@ -12,7 +12,5 @@ export default class SuccessText extends Base {
     ctx.font = '20px "TakaoPGothic"';
     ctx.fillStyle = '#e13e70';
     ctx.fillText('メチャいいね♡', buttonPositionX - 45, buttonPositionY + 60);
-
-    return this;
   }
 }

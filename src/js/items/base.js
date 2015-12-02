@@ -15,8 +15,6 @@ export default class Base {
     this.speedX = (x - this.x) / stepCount;
     this.speedY = (y - this.y) / stepCount;
     this.stepCount = stepCount;
-
-    return this;
   }
 
   step() {
@@ -27,8 +25,6 @@ export default class Base {
     } else {
       this.onStepEnd();
     }
-
-    return this;
   }
 
   onStepEnd() {
@@ -36,7 +32,6 @@ export default class Base {
   }
 
   draw(ctx) {
-    return this;
   }
 
   onMouseDown(x, y) {
