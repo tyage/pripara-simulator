@@ -32,4 +32,10 @@ export default class Base {
   draw(ctx) {
     return this;
   }
+
+  onMouseDown(x, y) {
+  }
+
+  onMouseUp(x, y) {
+  }
 }

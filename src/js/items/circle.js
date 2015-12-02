@@ -1,7 +1,7 @@
 import Base from './base';
 
 export default class Circle extends Base {
-  constructor(x, y, radius) {
+  constructor(x, y, radius = 25) {
     super(x, y);
     this.radius = radius;
 
@@ -9,6 +9,7 @@ export default class Circle extends Base {
     this.speedY = 0;
     this.stepCount = 0;
     this.isFinish = false;
+    this.isClicked = false;
   }
 
   draw(ctx) {
@@ -18,5 +19,18 @@ export default class Circle extends Base {
     ctx.fill();
 
     return this;
+  }
+
+  onMouseDown(x, y) {
+    let distanceX = x - this.x;
+    let distanceY = y - this.y;
+    if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
+      // clicked!
+      this.isClicked = true;
+    }
+  }
+
+  onMouseUp(x, y) {
+    this.isClicked = false;
   }
 }

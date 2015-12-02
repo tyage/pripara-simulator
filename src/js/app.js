@@ -18,6 +18,26 @@ let clear = ctx => {
 let scenario = generateScenario();
 let currentScenario = scenario.next();
 let items = [];
+
+let getMousePosition = e => {
+  let rect = canvas.getBoundingClientRect();
+  let x = e.clientX - rect.left;
+  let y = e.clientY - rect.top;
+  return [x, y];
+};
+canvas.addEventListener('mousedown', e => {
+  let [x, y] = getMousePosition(e);
+  items.forEach(item => {
+    item.onMouseDown(x, y);
+  });
+});
+canvas.addEventListener('mouseup', e => {
+  let [x, y] = getMousePosition(e);
+  items.forEach(item => {
+    item.onMouseUp(x, y);
+  });
+});
+
 let step = () => {
   clear(ctx);
 
