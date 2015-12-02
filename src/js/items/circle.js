@@ -2,15 +2,26 @@ import Base from './base';
 import { buttonPositionX, buttonPositionY } from '../config';
 
 export default class Circle extends Base {
-  constructor(x, y, radius = 25) {
+  constructor(x, y, radius = 25, stopCount = 10) {
     super(x, y);
     this.radius = radius;
+    this.stopCount = stopCount;
+
+    // phase1: 中心に移動
+    // phase2: 止まる
+    this.phase = 1;
   }
 
   onStepEnd() {
-    super.onStepEnd();
-
-    this.isFail = true;
+    if (this.phase === 1) {
+      this.phase = 2;
+      this.stepCount = this.stopCount;
+      this.speedX = 0;
+      this.speedY = 0;
+    } else {
+      super.onStepEnd();
+      this.isFail = true;
+    }
   }
 
   draw(ctx) {
