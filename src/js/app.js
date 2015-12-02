@@ -4,7 +4,8 @@ import { width, height } from './config';
 import { clearCanvas } from './utils';
 import SuccessText from './items/success-text';
 import FailText from './items/fail-text';
-import { drawStage1 } from './background';
+import Iine from './items/iine-text';
+import { drawStage1, drawCommonBackground } from './background';
 
 let gameWindow = document.getElementById('game-window');
 let canvas = document.createElement('canvas');
@@ -75,12 +76,16 @@ let step = () => {
 
   if (isSuccess) {
     items.push(new SuccessText());
+    for (let i = 0, l = Math.random() * 3; i < l; ++i) {
+      items.push(new Iine());
+    }
   } else if (isFail) {
     items.push(new FailText());
   }
 
   // TODO: draw a background of current stage
   drawStage1(ctx);
+  drawCommonBackground(ctx);
 
   if (currentScenario.done === true) {
     window.clearInterval(timer);

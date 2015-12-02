@@ -33,12 +33,20 @@ let drawButton = ctx => {
 };
 
 let drawStage1 = ctx => {
+  ctx.save();
+
   drawButton(ctx);
 
   // 下部のテキスト
   ctx.font = '25px "TakaoPGothic"';
   ctx.fillStyle = '#37ade1';
   ctx.fillText('画面をおしてね！', width / 2 - 80, height - 30);
+
+  ctx.restore();
 };
 
-export { drawStage1 };
+let drawCommonBackground = ctx => {
+  // TODO: ゲージ
+};
+
+export { drawStage1, drawCommonBackground };
