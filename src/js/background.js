@@ -39,8 +39,10 @@ let drawStage1 = ctx => {
 
   // 下部のテキスト
   ctx.font = '25px "TakaoPGothic"';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
   ctx.fillStyle = '#37ade1';
-  ctx.fillText('画面をおしてね！', width / 2 - 80, height - 30);
+  ctx.fillText('画面をおしてね！', width / 2, height - 40);
 
   ctx.restore();
 };
