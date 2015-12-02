@@ -76,9 +76,13 @@ let step = () => {
     items.push(new FailText());
   }
 
-  if (currentScenario.done === false) {
-    currentScenario = scenario.next();
-    window.requestAnimationFrame(step);
+  if (currentScenario.done === true) {
+    window.clearInterval(timer);
+    return;
   }
+
+  currentScenario = scenario.next();
 };
-step();
+let timer = window.setInterval(() => {
+  step();
+}, 30);

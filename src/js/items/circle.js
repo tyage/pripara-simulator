@@ -23,7 +23,7 @@ export default class Circle extends Base {
   onMouseDown(x, y) {
     let distanceX = buttonPositionX - this.x;
     let distanceY = buttonPositionY - this.y;
-    if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
+    if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius * 2, 2)) {
       this.isSuccess = true;
     }
   }

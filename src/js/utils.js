@@ -9,12 +9,12 @@ let createButton = (wait) => {
 }
 
 // angle: 0 - 1
-let createCircle = angle => {
-  let distance = 100;
+let createCircle = (angle, stepCount = 33) => {
+  let distance = 150;
   let x = buttonPositionX + distance * Math.cos(Math.PI * 2 * angle);
   let y = buttonPositionY - distance * Math.sin(Math.PI * 2 * angle);
   let circle = new Circle(x, y);
-  circle.moveTo(buttonPositionX, buttonPositionY, 100);
+  circle.moveTo(buttonPositionX, buttonPositionY, stepCount);
   return circle;
 };
 
