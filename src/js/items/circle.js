@@ -71,14 +71,11 @@ export default class Circle extends Base {
     ctx.restore();
   }
 
-  onMouseDown(x, y) {
+  onMouseDown() {
     let distanceX = buttonPositionX - this.x;
     let distanceY = buttonPositionY - this.y;
-    if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius * 2, 2)) {
+    if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
       this.isSuccess = true;
     }
-  }
-
-  onMouseUp(x, y) {
   }
 }

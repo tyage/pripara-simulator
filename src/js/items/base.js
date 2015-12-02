@@ -34,9 +34,9 @@ export default class Base {
   draw(ctx) {
   }
 
-  onMouseDown(x, y) {
+  onMouseDown() {
   }
 
-  onMouseUp(x, y) {
+  onMouseUp() {
   }
 }

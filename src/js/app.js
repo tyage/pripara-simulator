@@ -20,22 +20,16 @@ let currentScenario = scenario.next();
 let items = [];
 let score = 0;
 
-let getMousePosition = e => {
-  let rect = canvas.getBoundingClientRect();
-  let x = e.clientX - rect.left;
-  let y = e.clientY - rect.top;
-  return [x, y];
-};
-canvas.addEventListener('mousedown', e => {
-  let [x, y] = getMousePosition(e);
-  items.forEach(item => {
-    item.onMouseDown(x, y);
-  });
+// auto iine
+let isAuto = false;
+document.getElementById('auto-iine-value').addEventListener('change', e => {
+  isAuto = e.target.checked;
+  return false;
 });
-canvas.addEventListener('mouseup', e => {
-  let [x, y] = getMousePosition(e);
+
+canvas.addEventListener('mousedown', e => {
   items.forEach(item => {
-    item.onMouseUp(x, y);
+    item.onMouseDown();
   });
 });
 
@@ -60,6 +54,9 @@ let step = () => {
 
   // step items and draw
   items.forEach((item, i) => {
+    if (isAuto) {
+      item.onMouseDown();
+    }
     if (item.isSuccess) {
       isSuccess = true;
     }

@@ -1,9 +1,19 @@
 body {
   background: #fecde4;
 }
-#game-window canvas {
+#game-window {
+  position: relative;
+  height: 640px;
+  width: 360px;
   margin: 0 auto;
-  display: block;
-  cursor: pointer;
   box-shadow: 10px 10px 10px rgba(0,0,0,0.4);
+  #auto-iine {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 2;
+  }
+  canvas {
+    cursor: pointer;
+  }
 }
