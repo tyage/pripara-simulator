@@ -1,8 +1,6 @@
 import 'babel-polyfill';
 import generateScenario from './scenario';
-
-const width = 360;
-const height = 640;
+import { width, height } from './config';
 
 let gameWindow = document.getElementById('game-window');
 let canvas = document.createElement('canvas');
