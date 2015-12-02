@@ -66,7 +66,11 @@
 	
 	var _failText2 = _interopRequireDefault(_failText);
 	
-	var _background = __webpack_require__(198);
+	var _iineText = __webpack_require__(198);
+	
+	var _iineText2 = _interopRequireDefault(_iineText);
+	
+	var _background = __webpack_require__(199);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -151,12 +155,16 @@
 	
 	  if (isSuccess) {
 	    items.push(new _successText2.default());
+	    for (var i = 0, l = Math.random() * 3; i < l; ++i) {
+	      items.push(new _iineText2.default());
+	    }
 	  } else if (isFail) {
 	    items.push(new _failText2.default());
 	  }
 	
 	  // TODO: draw a background of current stage
 	  (0, _background.drawStage1)(ctx);
+	  (0, _background.drawCommonBackground)(ctx);
 	
 	  if (currentScenario.done === true) {
 	    window.clearInterval(timer);
@@ -5622,8 +5630,12 @@
 	};
 	
 	var clearCanvas = function clearCanvas(ctx) {
+	  ctx.save();
+	
 	  ctx.fillStyle = 'rgb(253, 219, 246)';
 	  ctx.fillRect(0, 0, _config.width, _config.height);
+	
+	  ctx.restore();
 	};
 	
 	exports.createCircle = createCircle;
@@ -5890,9 +5902,13 @@
 	  _createClass(SuccessText, [{
 	    key: 'draw',
 	    value: function draw(ctx) {
+	      ctx.save();
+	
 	      ctx.font = '20px "TakaoPGothic"';
 	      ctx.fillStyle = '#e13e70';
 	      ctx.fillText('メチャいいね♡', _config.buttonPositionX - 45, _config.buttonPositionY + 60);
+	
+	      ctx.restore();
 	    }
 	  }]);
 	
@@ -5942,9 +5958,13 @@
 	  _createClass(SuccessText, [{
 	    key: 'draw',
 	    value: function draw(ctx) {
+	      ctx.save();
+	
 	      ctx.font = '20px "TakaoPGothic"';
 	      ctx.fillStyle = 'purple';
 	      ctx.fillText('おしかったね', _config.buttonPositionX - 45, _config.buttonPositionY + 60);
+	
+	      ctx.restore();
 	    }
 	  }]);
 	
@@ -5959,10 +5979,75 @@
 
 	'use strict';
 	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.drawStage1 = undefined;
+	
+	var _base = __webpack_require__(194);
+	
+	var _base2 = _interopRequireDefault(_base);
+	
+	var _config = __webpack_require__(195);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SuccessText = (function (_Base) {
+	  _inherits(SuccessText, _Base);
+	
+	  function SuccessText() {
+	    var x = arguments.length <= 0 || arguments[0] === undefined ? _config.width + Math.random() * _config.width : arguments[0];
+	    var y = arguments.length <= 1 || arguments[1] === undefined ? Math.random() * _config.height : arguments[1];
+	
+	    _classCallCheck(this, SuccessText);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuccessText).call(this, x, y));
+	
+	    _this.speedX = -10;
+	    _this.stepCount = -_this.x / _this.speedX;
+	    _this.fontSize = 20 + Math.random() * 10;
+	    return _this;
+	  }
+	
+	  _createClass(SuccessText, [{
+	    key: 'draw',
+	    value: function draw(ctx) {
+	      ctx.save();
+	
+	      ctx.font = this.fontSize + 'px "TakaoPGothic"';
+	      ctx.shadowColor = 'black';
+	      ctx.shadowOffsetX = 0;
+	      ctx.shadowOffsetY = 0;
+	      ctx.shadowBlur = 3;
+	      ctx.fillStyle = 'white';
+	      ctx.fillText('いいね♡', this.x, this.y);
+	
+	      ctx.restore();
+	    }
+	  }]);
+	
+	  return SuccessText;
+	})(_base2.default);
+	
+	exports.default = SuccessText;
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.drawCommonBackground = exports.drawStage1 = undefined;
 	
 	var _config = __webpack_require__(195);
 	
@@ -5999,15 +6084,24 @@
 	};
 	
 	var drawStage1 = function drawStage1(ctx) {
+	  ctx.save();
+	
 	  drawButton(ctx);
 	
 	  // 下部のテキスト
 	  ctx.font = '25px "TakaoPGothic"';
 	  ctx.fillStyle = '#37ade1';
 	  ctx.fillText('画面をおしてね！', _config.width / 2 - 80, _config.height - 30);
+	
+	  ctx.restore();
+	};
+	
+	var drawCommonBackground = function drawCommonBackground(ctx) {
+	  // TODO: ゲージ
 	};
 	
 	exports.drawStage1 = drawStage1;
+	exports.drawCommonBackground = drawCommonBackground;
 
 /***/ }
 /******/ ]);
