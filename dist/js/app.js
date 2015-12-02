@@ -5671,21 +5671,33 @@
 	
 	  function Circle(x, y) {
 	    var radius = arguments.length <= 2 || arguments[2] === undefined ? 25 : arguments[2];
+	    var stopCount = arguments.length <= 3 || arguments[3] === undefined ? 10 : arguments[3];
 	
 	    _classCallCheck(this, Circle);
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Circle).call(this, x, y));
 	
 	    _this.radius = radius;
+	    _this.stopCount = stopCount;
+	
+	    // phase1: 中心に移動
+	    // phase2: 止まる
+	    _this.phase = 1;
 	    return _this;
 	  }
 	
 	  _createClass(Circle, [{
 	    key: 'onStepEnd',
 	    value: function onStepEnd() {
-	      _get(Object.getPrototypeOf(Circle.prototype), 'onStepEnd', this).call(this);
-	
-	      this.isFail = true;
+	      if (this.phase === 1) {
+	        this.phase = 2;
+	        this.stepCount = this.stopCount;
+	        this.speedX = 0;
+	        this.speedY = 0;
+	      } else {
+	        _get(Object.getPrototypeOf(Circle.prototype), 'onStepEnd', this).call(this);
+	        this.isFail = true;
+	      }
 	    }
 	  }, {
 	    key: 'draw',
