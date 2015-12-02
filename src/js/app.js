@@ -21,9 +21,10 @@ let items = [];
 let score = 0;
 
 // auto iine
-let isAuto = false;
-document.getElementById('auto-iine-value').addEventListener('change', e => {
-  isAuto = e.target.checked;
+let autoCheckbox = document.getElementById('auto-iine-value');
+let isAuto = autoCheckbox.checked;
+autoCheckbox.addEventListener('change', e => {
+  isAuto = autoCheckbox.checked;
   return false;
 });
 
