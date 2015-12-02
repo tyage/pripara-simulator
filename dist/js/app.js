@@ -46,33 +46,66 @@
 
 	'use strict';
 	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
+	
 	__webpack_require__(1);
 	
 	var _scenario = __webpack_require__(191);
 	
 	var _scenario2 = _interopRequireDefault(_scenario);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _config = __webpack_require__(196);
 	
-	var width = 360;
-	var height = 640;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var gameWindow = document.getElementById('game-window');
 	var canvas = document.createElement('canvas');
 	var ctx = canvas.getContext('2d');
 	
 	gameWindow.appendChild(canvas);
-	canvas.width = width;
-	canvas.height = height;
+	canvas.width = _config.width;
+	canvas.height = _config.height;
 	
 	var clear = function clear(ctx) {
 	  ctx.fillStyle = 'white';
-	  ctx.fillRect(0, 0, width, height);
+	  ctx.fillRect(0, 0, _config.width, _config.height);
 	};
 	
 	var scenario = (0, _scenario2.default)();
 	var currentScenario = scenario.next();
 	var items = [];
+	
+	var getMousePosition = function getMousePosition(e) {
+	  var rect = canvas.getBoundingClientRect();
+	  var x = e.clientX - rect.left;
+	  var y = e.clientY - rect.top;
+	  return [x, y];
+	};
+	canvas.addEventListener('mousedown', function (e) {
+	  var _getMousePosition = getMousePosition(e);
+	
+	  var _getMousePosition2 = _slicedToArray(_getMousePosition, 2);
+	
+	  var x = _getMousePosition2[0];
+	  var y = _getMousePosition2[1];
+	
+	  items.forEach(function (item) {
+	    item.onMouseDown(x, y);
+	  });
+	});
+	canvas.addEventListener('mouseup', function (e) {
+	  var _getMousePosition3 = getMousePosition(e);
+	
+	  var _getMousePosition4 = _slicedToArray(_getMousePosition3, 2);
+	
+	  var x = _getMousePosition4[0];
+	  var y = _getMousePosition4[1];
+	
+	  items.forEach(function (item) {
+	    item.onMouseUp(x, y);
+	  });
+	});
+	
 	var step = function step() {
 	  clear(ctx);
 	
@@ -88,7 +121,12 @@
 	    currentScenario = scenario.next();
 	  }
 	
-	  items.forEach(function (item) {
+	  items.forEach(function (item, i) {
+	    if (item.isFinish) {
+	      items.splice(i, 1);
+	      return;
+	    }
+	
 	    item.step();
 	    item.draw(ctx);
 	  });
@@ -5379,31 +5417,44 @@
 	
 	var _circle2 = _interopRequireDefault(_circle);
 	
+	var _button = __webpack_require__(195);
+	
+	var _button2 = _interopRequireDefault(_button);
+	
+	var _config = __webpack_require__(196);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = regeneratorRuntime.mark(function _callee() {
+	  var centerX, centerY;
 	  return regeneratorRuntime.wrap(function _callee$(_context) {
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
-	          _context.next = 2;
-	          return new _circle2.default(10, 10, 10).moveTo(100, 100, 20);
+	          centerX = _config.width / 2;
+	          centerY = _config.height / 2;
+	          _context.next = 4;
+	          return new _button2.default(centerX, centerY).moveTo(centerX, centerY, 150);
 	
-	        case 2:
-	          return _context.delegateYield((0, _utils.wait)(10), 't0', 3);
+	        case 4:
+	          _context.next = 6;
+	          return new _circle2.default(10, 10).moveTo(centerX, centerY, 100);
 	
-	        case 3:
-	          _context.next = 5;
-	          return new _circle2.default(10, 10, 10).moveTo(100, 100, 20);
-	
-	        case 5:
-	          _context.next = 7;
-	          return new _circle2.default(10, 30, 10).moveTo(100, 100, 20);
+	        case 6:
+	          return _context.delegateYield((0, _utils.wait)(50), 't0', 7);
 	
 	        case 7:
-	          return _context.delegateYield((0, _utils.wait)(40), 't1', 8);
+	          _context.next = 9;
+	          return new _circle2.default(10, 10).moveTo(centerX, centerY, 100);
 	
-	        case 8:
+	        case 9:
+	          _context.next = 11;
+	          return new _circle2.default(10, 110).moveTo(centerX, centerY, 100);
+	
+	        case 11:
+	          return _context.delegateYield((0, _utils.wait)(200), 't1', 12);
+	
+	        case 12:
 	        case 'end':
 	          return _context.stop();
 	      }
@@ -5432,7 +5483,7 @@
 
 /***/ },
 /* 193 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5442,42 +5493,39 @@
 	  value: true
 	});
 	
+	var _base = __webpack_require__(194);
+	
+	var _base2 = _interopRequireDefault(_base);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Circle = (function () {
-	  function Circle(x, y, radius) {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Circle = (function (_Base) {
+	  _inherits(Circle, _Base);
+	
+	  function Circle(x, y) {
+	    var radius = arguments.length <= 2 || arguments[2] === undefined ? 25 : arguments[2];
+	
 	    _classCallCheck(this, Circle);
 	
-	    this.x = x;
-	    this.y = y;
-	    this.radius = radius;
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Circle).call(this, x, y));
 	
-	    this.speedX = 0;
-	    this.speedY = 0;
-	    this.stepCount = 0;
+	    _this.radius = radius;
+	
+	    _this.speedX = 0;
+	    _this.speedY = 0;
+	    _this.stepCount = 0;
+	    _this.isFinish = false;
+	    _this.isClicked = false;
+	    return _this;
 	  }
 	
 	  _createClass(Circle, [{
-	    key: 'moveTo',
-	    value: function moveTo(x, y, stepCount) {
-	      this.speedX = (x - this.x) / stepCount;
-	      this.speedY = (y - this.y) / stepCount;
-	      this.stepCount = stepCount;
-	
-	      return this;
-	    }
-	  }, {
-	    key: 'step',
-	    value: function step() {
-	      if (this.stepCount > 0) {
-	        this.x += this.speedX;
-	        this.y += this.speedY;
-	        --this.stepCount;
-	      }
-	
-	      return this;
-	    }
-	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
 	      ctx.fillStyle = 'black';
@@ -5487,12 +5535,160 @@
 	
 	      return this;
 	    }
+	  }, {
+	    key: 'onMouseDown',
+	    value: function onMouseDown(x, y) {
+	      var distanceX = x - this.x;
+	      var distanceY = y - this.y;
+	      if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
+	        // clicked!
+	        this.isClicked = true;
+	      }
+	    }
+	  }, {
+	    key: 'onMouseUp',
+	    value: function onMouseUp(x, y) {
+	      this.isClicked = false;
+	    }
 	  }]);
 	
 	  return Circle;
-	})();
+	})(_base2.default);
 	
 	exports.default = Circle;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Base = (function () {
+	  function Base(x, y) {
+	    _classCallCheck(this, Base);
+	
+	    this.x = x;
+	    this.y = y;
+	
+	    this.speedX = 0;
+	    this.speedY = 0;
+	    this.stepCount = 0;
+	    this.isFinish = false;
+	  }
+	
+	  _createClass(Base, [{
+	    key: "moveTo",
+	    value: function moveTo(x, y, stepCount) {
+	      this.speedX = (x - this.x) / stepCount;
+	      this.speedY = (y - this.y) / stepCount;
+	      this.stepCount = stepCount;
+	
+	      return this;
+	    }
+	  }, {
+	    key: "step",
+	    value: function step() {
+	      if (this.stepCount > 0) {
+	        this.x += this.speedX;
+	        this.y += this.speedY;
+	        --this.stepCount;
+	      } else {
+	        this.isFinish = true;
+	      }
+	
+	      return this;
+	    }
+	  }, {
+	    key: "draw",
+	    value: function draw(ctx) {
+	      return this;
+	    }
+	  }, {
+	    key: "onMouseDown",
+	    value: function onMouseDown(x, y) {}
+	  }, {
+	    key: "onMouseUp",
+	    value: function onMouseUp(x, y) {}
+	  }]);
+	
+	  return Base;
+	})();
+	
+	exports.default = Base;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _circle = __webpack_require__(193);
+	
+	var _circle2 = _interopRequireDefault(_circle);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Button = (function (_Circle) {
+	  _inherits(Button, _Circle);
+	
+	  function Button() {
+	    _classCallCheck(this, Button);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Button).apply(this, arguments));
+	  }
+	
+	  _createClass(Button, [{
+	    key: 'draw',
+	    value: function draw(ctx) {
+	      ctx.fillStyle = this.isClicked ? 'red' : 'black';
+	      ctx.beginPath();
+	      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+	      ctx.fill();
+	
+	      return this;
+	    }
+	  }]);
+	
+	  return Button;
+	})(_circle2.default);
+	
+	exports.default = Button;
+
+/***/ },
+/* 196 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// original: 1920 x 3413
+	var width = 360;
+	var height = 640;
+	
+	exports.width = width;
+	exports.height = height;
 
 /***/ }
 /******/ ]);
