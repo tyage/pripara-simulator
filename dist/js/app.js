@@ -46,8 +46,6 @@
 
 	'use strict';
 	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
-	
 	__webpack_require__(1);
 	
 	var _scenario = __webpack_require__(191);
@@ -87,34 +85,16 @@
 	var items = [];
 	var score = 0;
 	
-	var getMousePosition = function getMousePosition(e) {
-	  var rect = canvas.getBoundingClientRect();
-	  var x = e.clientX - rect.left;
-	  var y = e.clientY - rect.top;
-	  return [x, y];
-	};
-	canvas.addEventListener('mousedown', function (e) {
-	  var _getMousePosition = getMousePosition(e);
-	
-	  var _getMousePosition2 = _slicedToArray(_getMousePosition, 2);
-	
-	  var x = _getMousePosition2[0];
-	  var y = _getMousePosition2[1];
-	
-	  items.forEach(function (item) {
-	    item.onMouseDown(x, y);
-	  });
+	// auto iine
+	var isAuto = false;
+	document.getElementById('auto-iine-value').addEventListener('change', function (e) {
+	  isAuto = e.target.checked;
+	  return false;
 	});
-	canvas.addEventListener('mouseup', function (e) {
-	  var _getMousePosition3 = getMousePosition(e);
 	
-	  var _getMousePosition4 = _slicedToArray(_getMousePosition3, 2);
-	
-	  var x = _getMousePosition4[0];
-	  var y = _getMousePosition4[1];
-	
+	canvas.addEventListener('mousedown', function (e) {
 	  items.forEach(function (item) {
-	    item.onMouseUp(x, y);
+	    item.onMouseDown();
 	  });
 	});
 	
@@ -139,6 +119,9 @@
 	
 	  // step items and draw
 	  items.forEach(function (item, i) {
+	    if (isAuto) {
+	      item.onMouseDown();
+	    }
 	    if (item.isSuccess) {
 	      isSuccess = true;
 	    }
@@ -5757,16 +5740,13 @@
 	    }
 	  }, {
 	    key: 'onMouseDown',
-	    value: function onMouseDown(x, y) {
+	    value: function onMouseDown() {
 	      var distanceX = _config.buttonPositionX - this.x;
 	      var distanceY = _config.buttonPositionY - this.y;
-	      if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius * 2, 2)) {
+	      if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
 	        this.isSuccess = true;
 	      }
 	    }
-	  }, {
-	    key: 'onMouseUp',
-	    value: function onMouseUp(x, y) {}
 	  }]);
 	
 	  return Circle;
@@ -5831,10 +5811,10 @@
 	    value: function draw(ctx) {}
 	  }, {
 	    key: "onMouseDown",
-	    value: function onMouseDown(x, y) {}
+	    value: function onMouseDown() {}
 	  }, {
 	    key: "onMouseUp",
-	    value: function onMouseUp(x, y) {}
+	    value: function onMouseUp() {}
 	  }]);
 	
 	  return Base;
@@ -6158,8 +6138,10 @@
 	var drawScore = function drawScore(ctx, score) {
 	  ctx.save();
 	
+	  ctx.translate(20, 50);
+	
 	  // スコアのゲージ
-	  var grad = ctx.createLinearGradient(20, 30, _config.width - 40, 30);
+	  var grad = ctx.createLinearGradient(0, 0, _config.width - 40, 30);
 	  grad.addColorStop(0, '#7cffad');
 	  grad.addColorStop(0.33, '#fbff6b');
 	  grad.addColorStop(0.66, '#f28346');
@@ -6167,14 +6149,14 @@
 	
 	  ctx.fillStyle = grad;
 	  var scoreWidth = (_config.width - 40) * (score < _config.maxScore ? score / _config.maxScore : 1);
-	  ctx.fillRect(20, 30, scoreWidth, 30);
+	  ctx.fillRect(0, 0, scoreWidth, 30);
 	
 	  // 縁
 	  ctx.strokeStyle = '#c4b6d7';
 	  ctx.shadowColor = '#e9d2e9';
 	  ctx.shadowBlur = 10;
 	  ctx.lineWidth = 5;
-	  ctx.strokeRect(20, 30, _config.width - 40, 30);
+	  ctx.strokeRect(0, 0, _config.width - 40, 30);
 	
 	  ctx.restore();
 	};
