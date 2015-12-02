@@ -33,7 +33,12 @@ let step = () => {
     currentScenario = scenario.next();
   }
 
-  items.forEach(item => {
+  items.forEach((item, i) => {
+    if (item.isFinish) {
+      items.splice(i, 1);
+      return;
+    }
+
     item.step();
     item.draw(ctx);
   });

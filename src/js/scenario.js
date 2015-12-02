@@ -11,5 +11,5 @@ export default (function * () {
   yield * wait(50);
   yield (new Circle(10, 10, 10)).moveTo(centerX, centerY, 100);
   yield (new Circle(10, 110, 10)).moveTo(centerX, centerY, 100);
-  yield * wait(100);
+  yield * wait(200);
 });
