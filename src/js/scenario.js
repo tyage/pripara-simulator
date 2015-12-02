@@ -4,8 +4,6 @@ import { width, height, buttonPositionX, buttonPositionY } from './config';
 let baseStep = 33;
 
 export default (function * () {
-  yield createButton(500);
-
   // ほんとにスペシャルなパーティーのはじまりは
   yield createCircle(1 / 8);
   yield * wait(baseStep);

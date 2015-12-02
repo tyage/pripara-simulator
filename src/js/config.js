@@ -4,5 +4,6 @@ const height = 640;
 
 const buttonPositionX = width / 2;
 const buttonPositionY = height * 0.6;
+const buttonRadius = 25;
 
-export { width, height, buttonPositionX, buttonPositionY };
+export { width, height, buttonPositionX, buttonPositionY, buttonRadius };
