@@ -5629,7 +5629,7 @@
 	};
 	
 	var clearCanvas = function clearCanvas(ctx) {
-	  ctx.fillStyle = 'white';
+	  ctx.fillStyle = 'rgb(253, 219, 246)';
 	  ctx.fillRect(0, 0, _config.width, _config.height);
 	};
 	
