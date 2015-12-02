@@ -3,7 +3,7 @@ import { width, height, buttonPositionX, buttonPositionY } from './config';
 
 let baseStep = 33;
 
-export default (function * () {
+let luckySurpriseBirthday = function * () {
   // ほんとにスペシャルなパーティーのはじまりは
   yield createCircle(1 / 8);
   yield * wait(baseStep);
@@ -43,5 +43,8 @@ export default (function * () {
   yield createCircle(3 / 8);
   yield createCircle(6 / 8);
 
-  yield * wait(200);
-});
+  // XXX: loop
+  yield * luckySurpriseBirthday();
+};
+
+export default luckySurpriseBirthday;
