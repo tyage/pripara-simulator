@@ -48,20 +48,23 @@ let drawStage1 = ctx => {
 let drawScore = (ctx, score) => {
   ctx.save();
 
+  // スコアのゲージ
+  let grad = ctx.createLinearGradient(20, 30, width - 40, 30);
+  grad.addColorStop(0, '#7cffad');
+  grad.addColorStop(0.33, '#fbff6b');
+  grad.addColorStop(0.66, '#f28346');
+  grad.addColorStop(1, '#d91b94');
+
+  ctx.fillStyle = grad;
+  let scoreWidth = (width - 40) * (score < maxScore ? score / maxScore : 1);
+  ctx.fillRect(20, 30, scoreWidth, 30);
+
   // 縁
   ctx.strokeStyle = '#c4b6d7';
   ctx.shadowColor = '#e9d2e9';
   ctx.shadowBlur = 10;
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 5;
   ctx.strokeRect(20, 30, width - 40, 30);
-
-  // スコアのゲージ
-  let grad = ctx.createLinearGradient(20, 30, width - 40, 30);
-  grad.addColorStop(0, '#f0c4d1');
-  grad.addColorStop(1, '#df83a0');
-  ctx.fillStyle = grad;
-  let scoreWidth = (width - 40) * score / maxScore;
-  ctx.fillRect(20, 30, scoreWidth, 30);
 
   ctx.restore();
 };
