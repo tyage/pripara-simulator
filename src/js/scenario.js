@@ -1,10 +1,16 @@
 import { wait } from './utils';
-import Circle from './circle';
+import Circle from './items/circle';
+import Button from './items/button';
+import { width, height } from './config';
 
 export default (function * () {
-  yield (new Circle(10, 10, 10)).moveTo(100, 100, 20);
-  yield * wait(10);
-  yield (new Circle(10, 10, 10)).moveTo(100, 100, 20);
-  yield (new Circle(10, 30, 10)).moveTo(100, 100, 20);
-  yield * wait(40);
+  let centerX = width / 2;
+  let centerY = height / 2;
+
+  yield (new Button(centerX, centerY)).moveTo(centerX, centerY, 150);
+  yield (new Circle(10, 10)).moveTo(centerX, centerY, 100);
+  yield * wait(50);
+  yield (new Circle(10, 10)).moveTo(centerX, centerY, 100);
+  yield (new Circle(10, 110)).moveTo(centerX, centerY, 100);
+  yield * wait(200);
 });

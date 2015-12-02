@@ -1,12 +1,12 @@
-export default class Circle {
-  constructor(x, y, radius) {
+export default class Base {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.radius = radius;
 
     this.speedX = 0;
     this.speedY = 0;
     this.stepCount = 0;
+    this.isFinish = false;
   }
 
   moveTo(x, y, stepCount) {
@@ -22,17 +22,20 @@ export default class Circle {
       this.x += this.speedX;
       this.y += this.speedY;
       --this.stepCount;
+    } else {
+      this.isFinish = true;
     }
 
     return this;
   }
 
   draw(ctx) {
-    ctx.fillStyle = 'black';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fill();
-
     return this;
+  }
+
+  onMouseDown(x, y) {
+  }
+
+  onMouseUp(x, y) {
   }
 }
