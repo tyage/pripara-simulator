@@ -54,7 +54,17 @@
 	
 	var _scenario2 = _interopRequireDefault(_scenario);
 	
-	var _config = __webpack_require__(196);
+	var _config = __webpack_require__(193);
+	
+	var _utils = __webpack_require__(192);
+	
+	var _successText = __webpack_require__(197);
+	
+	var _successText2 = _interopRequireDefault(_successText);
+	
+	var _failText = __webpack_require__(198);
+	
+	var _failText2 = _interopRequireDefault(_failText);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -65,11 +75,6 @@
 	gameWindow.appendChild(canvas);
 	canvas.width = _config.width;
 	canvas.height = _config.height;
-	
-	var clear = function clear(ctx) {
-	  ctx.fillStyle = 'white';
-	  ctx.fillRect(0, 0, _config.width, _config.height);
-	};
 	
 	var scenario = (0, _scenario2.default)();
 	var currentScenario = scenario.next();
@@ -107,7 +112,10 @@
 	});
 	
 	var step = function step() {
-	  clear(ctx);
+	  var isSuccess = false;
+	  var isFail = false;
+	
+	  (0, _utils.clearCanvas)(ctx);
 	
 	  while (true) {
 	    // current scenario is wait
@@ -122,7 +130,13 @@
 	  }
 	
 	  items.forEach(function (item, i) {
-	    if (item.isFinish) {
+	    if (item.isSuccess) {
+	      isSuccess = true;
+	    }
+	    if (item.isFail) {
+	      isFail = true;
+	    }
+	    if (item.isEnd || item.isFail || item.isSuccess) {
 	      items.splice(i, 1);
 	      return;
 	    }
@@ -130,6 +144,14 @@
 	    item.step();
 	    item.draw(ctx);
 	  });
+	
+	  if (isSuccess) {
+	    console.log('success');
+	    items.push(new _successText2.default());
+	  } else if (isFail) {
+	    console.log('fail');
+	    items.push(new _failText2.default());
+	  }
 	
 	  if (currentScenario.done === false) {
 	    currentScenario = scenario.next();
@@ -5413,48 +5435,45 @@
 	
 	var _utils = __webpack_require__(192);
 	
-	var _circle = __webpack_require__(193);
+	var _circle = __webpack_require__(194);
 	
 	var _circle2 = _interopRequireDefault(_circle);
 	
-	var _button = __webpack_require__(195);
+	var _button = __webpack_require__(196);
 	
 	var _button2 = _interopRequireDefault(_button);
 	
-	var _config = __webpack_require__(196);
+	var _config = __webpack_require__(193);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = regeneratorRuntime.mark(function _callee() {
-	  var centerX, centerY;
 	  return regeneratorRuntime.wrap(function _callee$(_context) {
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
-	          centerX = _config.width / 2;
-	          centerY = _config.height / 2;
+	          _context.next = 2;
+	          return new _button2.default(_config.buttonPositionX, _config.buttonPositionY).moveTo(_config.buttonPositionX, _config.buttonPositionY, 150);
+	
+	        case 2:
 	          _context.next = 4;
-	          return new _button2.default(centerX, centerY).moveTo(centerX, centerY, 150);
+	          return new _circle2.default(10, 10).moveTo(_config.buttonPositionX, _config.buttonPositionY, 100);
 	
 	        case 4:
-	          _context.next = 6;
-	          return new _circle2.default(10, 10).moveTo(centerX, centerY, 100);
+	          return _context.delegateYield((0, _utils.wait)(50), 't0', 5);
 	
-	        case 6:
-	          return _context.delegateYield((0, _utils.wait)(50), 't0', 7);
+	        case 5:
+	          _context.next = 7;
+	          return new _circle2.default(10, 10).moveTo(_config.buttonPositionX, _config.buttonPositionY, 100);
 	
 	        case 7:
 	          _context.next = 9;
-	          return new _circle2.default(10, 10).moveTo(centerX, centerY, 100);
+	          return new _circle2.default(10, 110).moveTo(_config.buttonPositionX, _config.buttonPositionY, 100);
 	
 	        case 9:
-	          _context.next = 11;
-	          return new _circle2.default(10, 110).moveTo(centerX, centerY, 100);
+	          return _context.delegateYield((0, _utils.wait)(200), 't1', 10);
 	
-	        case 11:
-	          return _context.delegateYield((0, _utils.wait)(200), 't1', 12);
-	
-	        case 12:
+	        case 10:
 	        case 'end':
 	          return _context.stop();
 	      }
@@ -5464,13 +5483,17 @@
 
 /***/ },
 /* 192 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.clearCanvas = exports.wait = undefined;
+	
+	var _config = __webpack_require__(193);
+	
 	var wait = function wait(seconds) {
 	  var list = [];
 	  for (var i = 0; i < seconds; ++i) {
@@ -5479,23 +5502,54 @@
 	  return list;
 	};
 	
+	var clearCanvas = function clearCanvas(ctx) {
+	  ctx.fillStyle = 'white';
+	  ctx.fillRect(0, 0, _config.width, _config.height);
+	};
+	
 	exports.wait = wait;
+	exports.clearCanvas = clearCanvas;
 
 /***/ },
 /* 193 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// original: 1920 x 3413
+	var width = 360;
+	var height = 640;
+	
+	var buttonPositionX = width / 2;
+	var buttonPositionY = height * 0.6;
+	
+	exports.width = width;
+	exports.height = height;
+	exports.buttonPositionX = buttonPositionX;
+	exports.buttonPositionY = buttonPositionY;
+
+/***/ },
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _base = __webpack_require__(194);
+	var _base = __webpack_require__(195);
 	
 	var _base2 = _interopRequireDefault(_base);
+	
+	var _config = __webpack_require__(193);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -5516,16 +5570,17 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Circle).call(this, x, y));
 	
 	    _this.radius = radius;
-	
-	    _this.speedX = 0;
-	    _this.speedY = 0;
-	    _this.stepCount = 0;
-	    _this.isFinish = false;
-	    _this.isClicked = false;
 	    return _this;
 	  }
 	
 	  _createClass(Circle, [{
+	    key: 'onStepEnd',
+	    value: function onStepEnd() {
+	      _get(Object.getPrototypeOf(Circle.prototype), 'onStepEnd', this).call(this);
+	
+	      this.isFail = true;
+	    }
+	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
 	      ctx.fillStyle = 'black';
@@ -5538,18 +5593,15 @@
 	  }, {
 	    key: 'onMouseDown',
 	    value: function onMouseDown(x, y) {
-	      var distanceX = x - this.x;
-	      var distanceY = y - this.y;
+	      var distanceX = _config.buttonPositionX - this.x;
+	      var distanceY = _config.buttonPositionY - this.y;
 	      if (Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(this.radius, 2)) {
-	        // clicked!
-	        this.isClicked = true;
+	        this.isSuccess = true;
 	      }
 	    }
 	  }, {
 	    key: 'onMouseUp',
-	    value: function onMouseUp(x, y) {
-	      this.isClicked = false;
-	    }
+	    value: function onMouseUp(x, y) {}
 	  }]);
 	
 	  return Circle;
@@ -5558,7 +5610,7 @@
 	exports.default = Circle;
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5581,7 +5633,9 @@
 	    this.speedX = 0;
 	    this.speedY = 0;
 	    this.stepCount = 0;
-	    this.isFinish = false;
+	    this.isEnd = false;
+	    this.isFail = false;
+	    this.isSuccess = false;
 	  }
 	
 	  _createClass(Base, [{
@@ -5601,10 +5655,15 @@
 	        this.y += this.speedY;
 	        --this.stepCount;
 	      } else {
-	        this.isFinish = true;
+	        this.onStepEnd();
 	      }
 	
 	      return this;
+	    }
+	  }, {
+	    key: "onStepEnd",
+	    value: function onStepEnd() {
+	      this.isEnd = true;
 	    }
 	  }, {
 	    key: "draw",
@@ -5625,18 +5684,20 @@
 	exports.default = Base;
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _circle = __webpack_require__(193);
+	var _circle = __webpack_require__(194);
 	
 	var _circle2 = _interopRequireDefault(_circle);
 	
@@ -5651,13 +5712,25 @@
 	var Button = (function (_Circle) {
 	  _inherits(Button, _Circle);
 	
-	  function Button() {
+	  function Button(x, y) {
+	    var radius = arguments.length <= 2 || arguments[2] === undefined ? 25 : arguments[2];
+	
 	    _classCallCheck(this, Button);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Button).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Button).call(this, x, y, radius));
+	
+	    _this.isClicked = false;
+	    return _this;
 	  }
 	
 	  _createClass(Button, [{
+	    key: 'onStepEnd',
+	    value: function onStepEnd() {
+	      _get(Object.getPrototypeOf(Button.prototype), 'onStepEnd', this).call(this);
+	
+	      this.isFail = false;
+	    }
+	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
 	      ctx.fillStyle = this.isClicked ? 'red' : 'black';
@@ -5667,6 +5740,16 @@
 	
 	      return this;
 	    }
+	  }, {
+	    key: 'onMouseDown',
+	    value: function onMouseDown(x, y) {
+	      this.isClicked = true;
+	    }
+	  }, {
+	    key: 'onMouseUp',
+	    value: function onMouseUp(x, y) {
+	      this.isClicked = false;
+	    }
 	  }]);
 	
 	  return Button;
@@ -5675,20 +5758,110 @@
 	exports.default = Button;
 
 /***/ },
-/* 196 */
-/***/ function(module, exports) {
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	// original: 1920 x 3413
-	var width = 360;
-	var height = 640;
 	
-	exports.width = width;
-	exports.height = height;
+	var _base = __webpack_require__(195);
+	
+	var _base2 = _interopRequireDefault(_base);
+	
+	var _config = __webpack_require__(193);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SuccessText = (function (_Base) {
+	  _inherits(SuccessText, _Base);
+	
+	  function SuccessText(x, y) {
+	    _classCallCheck(this, SuccessText);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuccessText).call(this, x, y));
+	
+	    _this.stepCount = 10;
+	    return _this;
+	  }
+	
+	  _createClass(SuccessText, [{
+	    key: 'draw',
+	    value: function draw(ctx) {
+	      ctx.fillStyle = 'blue';
+	      ctx.fillText('メチャいいね♡', _config.buttonPositionX, _config.buttonPositionY + 100);
+	
+	      return this;
+	    }
+	  }]);
+	
+	  return SuccessText;
+	})(_base2.default);
+	
+	exports.default = SuccessText;
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _base = __webpack_require__(195);
+	
+	var _base2 = _interopRequireDefault(_base);
+	
+	var _config = __webpack_require__(193);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SuccessText = (function (_Base) {
+	  _inherits(SuccessText, _Base);
+	
+	  function SuccessText(x, y) {
+	    _classCallCheck(this, SuccessText);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuccessText).call(this, x, y));
+	
+	    _this.stepCount = 10;
+	    return _this;
+	  }
+	
+	  _createClass(SuccessText, [{
+	    key: 'draw',
+	    value: function draw(ctx) {
+	      ctx.fillStyle = 'blue';
+	      ctx.fillText('おしかったね', _config.buttonPositionX, _config.buttonPositionY + 100);
+	
+	      return this;
+	    }
+	  }]);
+	
+	  return SuccessText;
+	})(_base2.default);
+	
+	exports.default = SuccessText;
 
 /***/ }
 /******/ ]);
