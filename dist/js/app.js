@@ -58,13 +58,15 @@
 	
 	var _utils = __webpack_require__(192);
 	
-	var _successText = __webpack_require__(197);
+	var _successText = __webpack_require__(196);
 	
 	var _successText2 = _interopRequireDefault(_successText);
 	
-	var _failText = __webpack_require__(198);
+	var _failText = __webpack_require__(197);
 	
 	var _failText2 = _interopRequireDefault(_failText);
+	
+	var _background = __webpack_require__(198);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -117,6 +119,7 @@
 	
 	  (0, _utils.clearCanvas)(ctx);
 	
+	  // fetch all items of current scenario
 	  while (true) {
 	    // current scenario is wait
 	    if (currentScenario.value === false || currentScenario.done) {
@@ -129,6 +132,7 @@
 	    currentScenario = scenario.next();
 	  }
 	
+	  // step items and draw
 	  items.forEach(function (item, i) {
 	    if (item.isSuccess) {
 	      isSuccess = true;
@@ -150,6 +154,9 @@
 	  } else if (isFail) {
 	    items.push(new _failText2.default());
 	  }
+	
+	  // TODO: draw a background of current stage
+	  (0, _background.drawStage1)(ctx);
 	
 	  if (currentScenario.done === true) {
 	    window.clearInterval(timer);
@@ -5447,131 +5454,127 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return (0, _utils.createButton)(500);
-	
-	        case 2:
-	          _context.next = 4;
 	          return (0, _utils.createCircle)(1 / 8);
 	
-	        case 4:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't0', 5);
+	        case 2:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't0', 3);
 	
-	        case 5:
-	          _context.next = 7;
+	        case 3:
+	          _context.next = 5;
 	          return (0, _utils.createCircle)(0 / 8);
 	
-	        case 7:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't1', 8);
+	        case 5:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't1', 6);
 	
-	        case 8:
-	          _context.next = 10;
+	        case 6:
+	          _context.next = 8;
 	          return (0, _utils.createCircle)(7 / 8);
 	
-	        case 10:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't2', 11);
+	        case 8:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't2', 9);
 	
-	        case 11:
-	          _context.next = 13;
+	        case 9:
+	          _context.next = 11;
 	          return (0, _utils.createCircle)(6 / 8);
 	
-	        case 13:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't3', 14);
+	        case 11:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't3', 12);
 	
-	        case 14:
-	          _context.next = 16;
+	        case 12:
+	          _context.next = 14;
 	          return (0, _utils.createCircle)(5 / 8);
 	
-	        case 16:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't4', 17);
+	        case 14:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't4', 15);
 	
-	        case 17:
-	          _context.next = 19;
+	        case 15:
+	          _context.next = 17;
 	          return (0, _utils.createCircle)(4 / 8);
 	
-	        case 19:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't5', 20);
+	        case 17:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't5', 18);
 	
-	        case 20:
-	          _context.next = 22;
+	        case 18:
+	          _context.next = 20;
 	          return (0, _utils.createCircle)(3 / 8);
 	
-	        case 22:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't6', 23);
+	        case 20:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't6', 21);
+	
+	        case 21:
+	          _context.next = 23;
+	          return (0, _utils.createCircle)(0 / 8);
 	
 	        case 23:
 	          _context.next = 25;
-	          return (0, _utils.createCircle)(0 / 8);
-	
-	        case 25:
-	          _context.next = 27;
 	          return (0, _utils.createCircle)(4 / 8);
 	
-	        case 27:
-	          return _context.delegateYield((0, _utils.wait)(baseStep / 2), 't7', 28);
+	        case 25:
+	          return _context.delegateYield((0, _utils.wait)(baseStep / 2), 't7', 26);
+	
+	        case 26:
+	          _context.next = 28;
+	          return (0, _utils.createCircle)(0 / 8);
 	
 	        case 28:
 	          _context.next = 30;
-	          return (0, _utils.createCircle)(0 / 8);
-	
-	        case 30:
-	          _context.next = 32;
 	          return (0, _utils.createCircle)(4 / 8);
 	
-	        case 32:
-	          return _context.delegateYield((0, _utils.wait)(baseStep / 2), 't8', 33);
+	        case 30:
+	          return _context.delegateYield((0, _utils.wait)(baseStep / 2), 't8', 31);
+	
+	        case 31:
+	          _context.next = 33;
+	          return (0, _utils.createCircle)(1 / 8);
 	
 	        case 33:
 	          _context.next = 35;
-	          return (0, _utils.createCircle)(1 / 8);
+	          return (0, _utils.createCircle)(3 / 8);
 	
 	        case 35:
 	          _context.next = 37;
-	          return (0, _utils.createCircle)(3 / 8);
+	          return (0, _utils.createCircle)(6 / 8);
 	
 	        case 37:
-	          _context.next = 39;
-	          return (0, _utils.createCircle)(6 / 8);
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't9', 38);
 	
-	        case 39:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't9', 40);
-	
-	        case 40:
-	          _context.next = 42;
+	        case 38:
+	          _context.next = 40;
 	          return (0, _utils.createCircle)(4 / 8);
 	
-	        case 42:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't10', 43);
+	        case 40:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't10', 41);
 	
-	        case 43:
-	          _context.next = 45;
+	        case 41:
+	          _context.next = 43;
 	          return (0, _utils.createCircle)(6 / 8);
 	
-	        case 45:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't11', 46);
+	        case 43:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't11', 44);
 	
-	        case 46:
-	          _context.next = 48;
+	        case 44:
+	          _context.next = 46;
 	          return (0, _utils.createCircle)(0 / 8);
 	
-	        case 48:
-	          return _context.delegateYield((0, _utils.wait)(baseStep), 't12', 49);
+	        case 46:
+	          return _context.delegateYield((0, _utils.wait)(baseStep), 't12', 47);
+	
+	        case 47:
+	          _context.next = 49;
+	          return (0, _utils.createCircle)(1 / 8);
 	
 	        case 49:
 	          _context.next = 51;
-	          return (0, _utils.createCircle)(1 / 8);
+	          return (0, _utils.createCircle)(3 / 8);
 	
 	        case 51:
 	          _context.next = 53;
-	          return (0, _utils.createCircle)(3 / 8);
-	
-	        case 53:
-	          _context.next = 55;
 	          return (0, _utils.createCircle)(6 / 8);
 	
-	        case 55:
-	          return _context.delegateYield((0, _utils.wait)(200), 't13', 56);
+	        case 53:
+	          return _context.delegateYield((0, _utils.wait)(200), 't13', 54);
 	
-	        case 56:
+	        case 54:
 	        case 'end':
 	          return _context.stop();
 	      }
@@ -5588,25 +5591,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.clearCanvas = exports.wait = exports.createCircle = exports.createButton = undefined;
+	exports.clearCanvas = exports.wait = exports.createCircle = undefined;
 	
 	var _circle = __webpack_require__(193);
 	
 	var _circle2 = _interopRequireDefault(_circle);
 	
-	var _button = __webpack_require__(196);
-	
-	var _button2 = _interopRequireDefault(_button);
-	
 	var _config = __webpack_require__(195);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var createButton = function createButton(wait) {
-	  var button = new _button2.default(_config.buttonPositionX, _config.buttonPositionY);
-	  button.moveTo(_config.buttonPositionX, _config.buttonPositionY, wait);
-	  return button;
-	};
 	
 	// angle: 0 - 1
 	var createCircle = function createCircle(angle) {
@@ -5633,7 +5626,6 @@
 	  ctx.fillRect(0, 0, _config.width, _config.height);
 	};
 	
-	exports.createButton = createButton;
 	exports.createCircle = createCircle;
 	exports.wait = wait;
 	exports.clearCanvas = clearCanvas;
@@ -5849,111 +5841,16 @@
 	
 	var buttonPositionX = width / 2;
 	var buttonPositionY = height * 0.6;
+	var buttonRadius = 25;
 	
 	exports.width = width;
 	exports.height = height;
 	exports.buttonPositionX = buttonPositionX;
 	exports.buttonPositionY = buttonPositionY;
+	exports.buttonRadius = buttonRadius;
 
 /***/ },
 /* 196 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _circle = __webpack_require__(193);
-	
-	var _circle2 = _interopRequireDefault(_circle);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Button = (function (_Circle) {
-	  _inherits(Button, _Circle);
-	
-	  function Button(x, y) {
-	    var radius = arguments.length <= 2 || arguments[2] === undefined ? 25 : arguments[2];
-	
-	    _classCallCheck(this, Button);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Button).call(this, x, y, radius));
-	
-	    _this.isClicked = false;
-	    return _this;
-	  }
-	
-	  _createClass(Button, [{
-	    key: 'onStepEnd',
-	    value: function onStepEnd() {
-	      _get(Object.getPrototypeOf(Button.prototype), 'onStepEnd', this).call(this);
-	
-	      this.isFail = false;
-	    }
-	  }, {
-	    key: 'draw',
-	    value: function draw(ctx) {
-	      ctx.save();
-	
-	      ctx.translate(this.x, this.y);
-	
-	      // 一番外のふち
-	      ctx.strokeStyle = '#ca31cd';
-	      ctx.lineWidth = 7;
-	      ctx.beginPath();
-	      ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
-	      ctx.stroke();
-	
-	      // 一つ中にあるふち
-	      ctx.strokeStyle = 'white';
-	      ctx.lineWidth = 5;
-	      ctx.beginPath();
-	      ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
-	      ctx.stroke();
-	
-	      // 一番中のふち
-	      var grad = ctx.createLinearGradient(0, 0, 0, this.radius * 2);
-	      grad.addColorStop(0, '#a77518');
-	      grad.addColorStop(1, '#f3e244');
-	      ctx.strokeStyle = grad;
-	      ctx.lineWidth = 4;
-	      ctx.beginPath();
-	      ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
-	      ctx.stroke();
-	
-	      ctx.restore();
-	    }
-	  }, {
-	    key: 'onMouseDown',
-	    value: function onMouseDown(x, y) {
-	      this.isClicked = true;
-	    }
-	  }, {
-	    key: 'onMouseUp',
-	    value: function onMouseUp(x, y) {
-	      this.isClicked = false;
-	    }
-	  }]);
-	
-	  return Button;
-	})(_circle2.default);
-	
-	exports.default = Button;
-
-/***/ },
-/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6005,7 +5902,7 @@
 	exports.default = SuccessText;
 
 /***/ },
-/* 198 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6055,6 +5952,62 @@
 	})(_base2.default);
 	
 	exports.default = SuccessText;
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.drawStage1 = undefined;
+	
+	var _config = __webpack_require__(195);
+	
+	var drawButton = function drawButton(ctx) {
+	  ctx.save();
+	
+	  ctx.translate(_config.buttonPositionX, _config.buttonPositionY);
+	
+	  // 一番外のふち
+	  ctx.strokeStyle = '#ca31cd';
+	  ctx.lineWidth = 7;
+	  ctx.beginPath();
+	  ctx.arc(0, 0, _config.buttonRadius, 0, Math.PI * 2, false);
+	  ctx.stroke();
+	
+	  // 一つ中にあるふち
+	  ctx.strokeStyle = 'white';
+	  ctx.lineWidth = 5;
+	  ctx.beginPath();
+	  ctx.arc(0, 0, _config.buttonRadius, 0, Math.PI * 2, false);
+	  ctx.stroke();
+	
+	  // 一番中のふち
+	  var grad = ctx.createLinearGradient(0, 0, 0, _config.buttonRadius * 2);
+	  grad.addColorStop(0, '#a77518');
+	  grad.addColorStop(1, '#f3e244');
+	  ctx.strokeStyle = grad;
+	  ctx.lineWidth = 4;
+	  ctx.beginPath();
+	  ctx.arc(0, 0, _config.buttonRadius, 0, Math.PI * 2, false);
+	  ctx.stroke();
+	
+	  ctx.restore();
+	};
+	
+	var drawStage1 = function drawStage1(ctx) {
+	  drawButton(ctx);
+	
+	  // 下部のテキスト
+	  ctx.font = '25px "TakaoPGothic"';
+	  ctx.fillStyle = '#37ade1';
+	  ctx.fillText('画面をおしてね！', _config.width / 2 - 80, _config.height - 30);
+	};
+	
+	exports.drawStage1 = drawStage1;
 
 /***/ }
 /******/ ]);
