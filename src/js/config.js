@@ -6,4 +6,6 @@ const buttonPositionX = width / 2;
 const buttonPositionY = height * 0.6;
 const buttonRadius = 25;
 
-export { width, height, buttonPositionX, buttonPositionY, buttonRadius };
+const maxScore = 10000;
+
+export { width, height, buttonPositionX, buttonPositionY, buttonRadius, maxScore };

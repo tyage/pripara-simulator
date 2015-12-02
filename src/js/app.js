@@ -18,6 +18,7 @@ canvas.height = height;
 let scenario = generateScenario();
 let currentScenario = scenario.next();
 let items = [];
+let score = 0;
 
 let getMousePosition = e => {
   let rect = canvas.getBoundingClientRect();
@@ -76,6 +77,7 @@ let step = () => {
 
   if (isSuccess) {
     items.push(new SuccessText());
+    score += 1000;
     for (let i = 0, l = Math.random() * 3; i < l; ++i) {
       items.push(new Iine());
     }
@@ -85,7 +87,7 @@ let step = () => {
 
   // TODO: draw a background of current stage
   drawStage1(ctx);
-  drawCommonBackground(ctx);
+  drawCommonBackground(ctx, score);
 
   if (currentScenario.done === true) {
     window.clearInterval(timer);
