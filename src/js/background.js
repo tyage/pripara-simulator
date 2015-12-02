@@ -1,4 +1,4 @@
-import { buttonPositionX, buttonPositionY, buttonRadius, width, height } from './config';
+import { buttonPositionX, buttonPositionY, buttonRadius, width, height, maxScore } from './config';
 
 let drawButton = ctx => {
   ctx.save();
@@ -45,8 +45,29 @@ let drawStage1 = ctx => {
   ctx.restore();
 };
 
-let drawCommonBackground = ctx => {
-  // TODO: ゲージ
+let drawScore = (ctx, score) => {
+  ctx.save();
+
+  // 縁
+  ctx.strokeStyle = '#c4b6d7';
+  ctx.shadowColor = '#e9d2e9';
+  ctx.shadowBlur = 10;
+  ctx.lineWidth = 10;
+  ctx.strokeRect(20, 30, width - 40, 30);
+
+  // スコアのゲージ
+  let grad = ctx.createLinearGradient(20, 30, width - 40, 30);
+  grad.addColorStop(0, '#f0c4d1');
+  grad.addColorStop(1, '#df83a0');
+  ctx.fillStyle = grad;
+  let scoreWidth = (width - 40) * score / maxScore;
+  ctx.fillRect(20, 30, scoreWidth, 30);
+
+  ctx.restore();
+};
+
+let drawCommonBackground = (ctx, score) => {
+  drawScore(ctx, score);
 };
 
 export { drawStage1, drawCommonBackground };

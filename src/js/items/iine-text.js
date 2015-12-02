@@ -15,8 +15,6 @@ export default class SuccessText extends Base {
 
     ctx.font = `${this.fontSize}px "TakaoPGothic"`;
     ctx.shadowColor = 'black';
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 0;
     ctx.shadowBlur = 3;
     ctx.fillStyle = 'white';
     ctx.fillText('いいね♡', this.x, this.y);
